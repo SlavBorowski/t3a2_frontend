@@ -11,6 +11,7 @@ import { TripLog } from "./page/TripLog";
 import { TripLogEdit } from "./page/TripLogEdit";
 import { LandmarkPrivate } from "./page/LandmarkPrivate";
 import { Home } from "./page/Home";
+import { Banner } from "./header/Banner";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   return (
     <div>
       <NavBar />
+      <Banner />
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/landmarks" component={Landmarks} />
