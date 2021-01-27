@@ -28,15 +28,15 @@ export function LocationCard(props) {
   // })
 
   return (
-    <CardWrapper>
-      <CardImage src={location.img_src} alt="City Feature" />
+      <CardWrapper to={"/landmarks/" + Locations[props.id].title}>
+        <CardImage src={location.img_src} alt="City Feature" />
 
-      <CardBodyWrapper>
-        <CardTitle>{location.title}</CardTitle>
-        <CardSubTitle><LandmarkCount name={location.title} landmarks={location.landmarks}/> Landmarks within 1km</CardSubTitle>
-        <CardText>{location.description}</CardText>
-      </CardBodyWrapper>
-    
-    </CardWrapper>
+        <CardBodyWrapper>
+          <CardTitle>{location.title}</CardTitle>
+          <CardSubTitle><LandmarkCount name={location.title} landmarks={location.landmarks}/> Landmarks within 1km</CardSubTitle>
+          <CardText>{location.description}</CardText>
+        </CardBodyWrapper>
+      
+      </CardWrapper>
   );
 }

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 export const LocationCardsWrapper = styled.div`
   max-width: 1500px;
@@ -8,7 +9,9 @@ export const LocationCardsWrapper = styled.div`
   justify-content: center;
 `;
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Link)`
+  text-decoration: none;
+  color: black;
   width: 350px;
   height: 450px;
   border: solid 2px #DDDDDD;
