@@ -1,8 +1,11 @@
+import { useParams } from "react-router-dom";
+import {SubPageBody} from '../../styles/App'
 
 export function Landmarks() {
+  let { location } = useParams();
   return (
-    <>
-      <h1>Landmarks</h1>
-    </>
+    <SubPageBody>
+      <h2>Landmarks for {location}</h2>
+    </SubPageBody>
   );
 }
