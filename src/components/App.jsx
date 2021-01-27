@@ -15,7 +15,6 @@ import { Banner } from "./header/Banner";
 
 
 function App() {
-  
   return (
     <div>
       <NavBar />

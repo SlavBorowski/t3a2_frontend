@@ -34,5 +34,41 @@
     "title": "Montreal",
     "landmarks": 22,
     "description": "Montréal is the largest city in Canada's Québec province. It’s set on an island in the Saint Lawrence River and named after Mt. Royal, the triple-peaked hill at its heart. Its boroughs, many of which were once independent cities, include cobblestoned, French colonial Vieux-Montréal."
+  },
+  {
+    "img_src": "/images/london_stock_photo.jpg",
+    "title": "London",
+    "landmarks": 878,
+    "description": "London, the capital of England and the United Kingdom, is a 21st-century city with history stretching back to Roman times. At its centre stand the imposing Houses of Parliament, the iconic ‘Big Ben’ clock tower and Westminster Abbey, site of British monarch coronations."
+  },
+  {
+    "img_src": "/images/boston_stock_photo.jpg",
+    "title": "Boston",
+    "landmarks": 195,
+    "description": "Boston is the capital and most populous city of the Commonwealth of Massachusetts in the United States and 21st most populous city in the United States. The city proper covers 48.4 square miles with an estimated population of 692,600 in 2019, also making it the most populous city in New England."
+  },
+  {
+    "img_src": "/images/mexico_city_stock_photo.jpg",
+    "title": "Mexico City",
+    "landmarks": 43,
+    "description": "Mexico City is the densely populated, high-altitude capital of Mexico. It's known for its Templo Mayor (a 13th-century Aztec temple), the baroque Catedral Metropolitana de México of the Spanish conquistadors and the Palacio Nacional, which houses historic murals by Diego Rivera."
+  },
+  {
+    "img_src": "/images/johannesburg_stock_photo.jpg",
+    "title": "Johannesburg",
+    "landmarks": 8,
+    "description": "Johannesburg, South Africa's biggest city and capital of Gauteng province, began as a 19th-century gold-mining settlement. Its sprawling Soweto township was once home to Nelson Mandela and Desmond Tutu. Mandela’s former residence is now the Mandela House museum."
+  },
+  {
+    "img_src": "/images/shanghai_stock_photo.jpg",
+    "title": "Shanghai",
+    "landmarks": 13,
+    "description": "Shanghai, on China’s central coast, is the country's biggest city and a global financial hub. Its heart is the Bund, a famed waterfront promenade lined with colonial-era buildings. Across the Huangpu River rises the Pudong district’s futuristic skyline, including 632m Shanghai Tower."
+  },
+  {
+    "img_src": "/images/tokyo_stock_photo.jpg",
+    "title": "Tokyo",
+    "landmarks": 46,
+    "description": "Tokyo, Japan’s busy capital, mixes the ultramodern and the traditional, from neon-lit skyscrapers to historic temples. The opulent Meiji Shinto Shrine is known for its towering gate and surrounding woods. The Imperial Palace sits amid large public gardens."
   }
 ]

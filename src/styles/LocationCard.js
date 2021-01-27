@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const LocationCardsWrapper = styled.div`
+  max-width: 1500px;
+  margin: 0px auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
