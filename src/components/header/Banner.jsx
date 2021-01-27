@@ -1,13 +1,9 @@
-import { BannerWrapper } from '../../styles/BannerWrapper'
-import { BannerText } from '../../styles/BannerText'
+import { BannerWrapper, BannerText } from '../../styles/header'
 
 export function Banner() {
   return (
-    <>
-      <img src="/banner.jpg" alt="Mount Bromo volcano" width="100%" />
-      <BannerWrapper>
+    <BannerWrapper>
       <BannerText>The Travelling Photographer</BannerText>
     </BannerWrapper>
-    </>
   );
 }
