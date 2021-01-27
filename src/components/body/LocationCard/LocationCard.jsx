@@ -1,20 +1,30 @@
-import { CardWrapper, CardImage, CardBodyWrapper} from '../../../styles/LocationCard'
+import { 
+  CardWrapper, 
+  CardImage, 
+  CardBodyWrapper, 
+  CardTitle, 
+  CardSubTitle, 
+  CardText} from '../../../styles/LocationCard'
+import Locations from './locations.json'
 
-export function LocationCard() {
+export function LocationCard(props) {
+  const location = {
+    img_src: Locations[props.id].img_src, 
+    title: Locations[props.id].title, 
+    landmarks: Locations[props.id].landmarks,
+    description: Locations[props.id].description
+  };
+
   return (
     <CardWrapper>
-      <CardImage src="/images/stock_location_image1.png" alt="City Feature" />
+      <CardImage src={location.img_src} alt="City Feature" />
+
       <CardBodyWrapper>
-        <h2>Prague</h2>
-        <h4>1136 Landmarks within 1km</h4>
-        <p> 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Praesent ut nulla dapibus massa congue placerat vestibulum a justo. 
-          Praesent diam urna, egestas id ipsum dapibus, porttitor molestie magna. 
-          Phasellus vel mi vitae mi bibendum rutrum in non ante. 
-        </p>
+        <CardTitle>{location.title}</CardTitle>
+        <CardSubTitle>{location.landmarks} Landmarks within 1km</CardSubTitle>
+        <CardText>{location.description}</CardText>
       </CardBodyWrapper>
-      
+    
     </CardWrapper>
   );
 }
