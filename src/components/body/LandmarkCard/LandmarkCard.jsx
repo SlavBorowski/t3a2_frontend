@@ -11,17 +11,20 @@ export function LandmarkCard(props) {
   const [landmarkDescription, setLandmarkDescription] = useState();
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
 
-  // Runs on ComponentDidMount once and will set the landmark description
+  // Runs on ComponentDidMount once and will set the landmark image/description
   useEffect(() => {
     if(props.id){
-      apiGet("xid/" + props.id).then(data => {
-        if (data.preview) setLandmarkImageSrc(data.preview.source)
-        setLandmarkDescription(data.wikipedia_extracts
-        ? data.wikipedia_extracts.text
-        : data.info
-        ? data.info.descr
-        : "No description")
-        })
+      const timer = setTimeout(() => {
+        apiGet("xid/" + props.id).then(data => {
+          if (data.preview) setLandmarkImageSrc(data.preview.source)
+          setLandmarkDescription(data.wikipedia_extracts
+          ? data.wikipedia_extracts.text
+          : data.info
+          ? data.info.descr
+          : "No description")
+          })
+      }, (500));
+      return () => clearTimeout(timer);
     }
   }, [props.id]);
 
