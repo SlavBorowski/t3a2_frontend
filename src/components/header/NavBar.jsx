@@ -1,4 +1,3 @@
-import {NavLink} from "react-router-dom";
 import { NavWrapper, NavButton } from '../../styles/NavBar'
 
 export function NavBar() {
