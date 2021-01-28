@@ -7,9 +7,6 @@ import {
   CardText} from '../../../styles/LocationCard'
 import { LandmarkCount } from './LandmarkCount'
 import Locations from './locations.json'
-// import {useEffect} from 'react' // Only use for demos
-// import { landmarkCount } from '../../../api/openTripMap/landmarkCount' // Only use for demos
-
 
 export function LocationCard(props) {
   const location = {
@@ -18,14 +15,6 @@ export function LocationCard(props) {
     landmarks: Locations[props.id].landmarks,
     description: Locations[props.id].description
   };
-
-  // Only use for demos, too many API requests for main page
-  // useEffect(() => {
-  //   const timer = setTimeout(() => {
-  //     landmarkCount(Locations[props.id].title);
-  //   }, (600 * props.id));
-  //   return () => clearTimeout(timer);
-  // })
 
   return (
       <CardWrapper to={"/landmarks/" + Locations[props.id].title}>

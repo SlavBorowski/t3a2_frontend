@@ -9,3 +9,13 @@ export const SubPageBody = styled.div`
   margin: 0px auto;
   padding: 0px 20px;
 `;
+
+export const LandmarkListFooter = styled.footer`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ListButton = styled.button`
+  width: 100px;
+`;
+
