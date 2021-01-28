@@ -66,10 +66,28 @@ export function Landmarks() {
       `radius=1000&limit=${pageLength}&offset=${offset}&lon=${locationPos[0]}&lat=${locationPos[1]}&rate=2&format=json`
     ).then(function(landmarksData) {
       const timer = setTimeout(() => {
-        setLandmarks(landmarksData.map(item => item))
+        const landmarkItemArr = landmarksData.map(item => item)
+        setLandmarks(getUnique(landmarkItemArr))
       }, (500));
       return () => clearTimeout(timer);
     })
+  }
+
+  // Defining function to get unique values from an array
+  function getUnique(array){
+    var uniqueArray = [];
+    
+    // Loop through array values
+    for(let i=0; i < array.length; i++){
+        if(uniqueArray.findIndex(item => item.name === array[i].name) === -1) {
+            uniqueArray.push(array[i]);
+        }
+    }
+
+    let repeatWarning = document.getElementById("repeat_warning");
+    repeatWarning.style.visibility = "hidden";
+    if(uniqueArray.length < pageLength) repeatWarning.style.visibility = "visible";
+    return uniqueArray;
   }
 
   return (
@@ -92,6 +110,7 @@ export function Landmarks() {
           Next
         </ListButton>
       </LandmarkListFooter>
+      <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
     </SubPageBody>
   );
 }

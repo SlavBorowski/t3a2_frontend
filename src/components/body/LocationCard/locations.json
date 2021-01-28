@@ -24,10 +24,10 @@
     "description": "New York City comprises 5 boroughs sitting where the Hudson River meets the Atlantic Ocean. At its core is Manhattan, a densely populated borough that’s among the world’s major commercial, financial and cultural centers. Its iconic sites include the Empire State Building and Central Park."
   },
   {
-    "img_src": "/images/melbourne_stock_photo.jpg",
-    "title": "Melbourne",
-    "landmarks": 131,
-    "description": "Melbourne is the coastal capital of the southeastern Australian state of Victoria. At the city's centre is the modern Federation Square development, with plazas, bars, and restaurants by the Yarra River."
+    "img_src": "/images/adelaide_stock_photo.jpg",
+    "title": "Adelaide",
+    "landmarks": 24,
+    "description": "Adelaide is South Australia’s cosmopolitan coastal capital. Its ring of parkland on the River Torrens is home to renowned museums such as the Art Gallery of South Australia, displaying expansive collections including noted Indigenous art, and the South Australian Museum, devoted to natural history."
   },
   {
     "img_src": "/images/montreal_stock_photo.jpg",
