@@ -3,12 +3,12 @@ import { NavWrapper, NavButton } from '../../styles/NavBar'
 
 export function NavBar() {
   return (
-    <NavWrapper>
-      <NavButton><NavLink to="/">Home </NavLink></NavButton>
-      <NavButton><NavLink to="/about">About </NavLink></NavButton>
-      <NavButton><NavLink to="/landmarks">Places </NavLink></NavButton>
-      <NavButton><NavLink to="/day_planner">Plans </NavLink></NavButton>
-      <NavButton><NavLink to="/profile">Profile </NavLink></NavButton>
-    </NavWrapper>
+    <>
+      <NavLink to="/">Home </NavLink>
+      <NavLink to="/about">About </NavLink>
+      <NavLink to="/landmarks/Paris">Places </NavLink>
+      <NavLink to="/day_planner">Plans </NavLink>
+      <NavLink to="/profile">Profile </NavLink>
+    </>
   );
 }

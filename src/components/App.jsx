@@ -15,15 +15,14 @@ import { Banner } from "./header/Banner";
 
 
 function App() {
-  
   return (
     <div>
       <NavBar />
       <Banner />
       <Switch>
         <Route exact path="/about" component={About} />
-        <Route exact path="/landmarks" component={Landmarks} />
-        <Route exact path="/landmarks/:id" component={Landmark} />
+        <Route exact path="/landmarks/:location" component={Landmarks} />
+        <Route exact path="/landmarks/:location/:id" component={Landmark} />
         <Route exact path="/day_planner" component={DayPlanner} />
         <Route exact path="/profile" component={Profile} />
         <Route exact path="/profile/trip_log" component={TripLog} />

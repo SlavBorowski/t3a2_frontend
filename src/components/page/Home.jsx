@@ -1,6 +1,6 @@
 import {LocationCard} from '../body/LocationCard/LocationCard'
 import {LocationCardsWrapper} from '../../styles/LocationCard'
-import {HomePageTitle} from '../../styles/App'
+import {HomePageBody} from '../../styles/App'
 import Locations from '../body/LocationCard/locations.json'
 
 export function Home() {
@@ -10,11 +10,11 @@ export function Home() {
   );
 
   return (
-    <>
-      <HomePageTitle>Popular Locations</HomePageTitle>
+    <HomePageBody>
+      <h1>Popular Locations</h1>
       <LocationCardsWrapper>
         {locationCards}
       </LocationCardsWrapper>
-    </>
+    </HomePageBody>
   );
 }
