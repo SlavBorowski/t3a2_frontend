@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const BannerWrapper = styled.div`
   border: solid 0.1px white;
-  height: 200px;
+  height: 300px;
   background-image: url("/banner.jpg");
   background-position: center center;
   background-repeat: no-repeat;
