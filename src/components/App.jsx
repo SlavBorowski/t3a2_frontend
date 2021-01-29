@@ -2,18 +2,19 @@ import { Route, Switch } from "react-router-dom";
 
 import { NavBar } from './header/NavBar'
 import { ProtectedRoute } from './header/ProtectedRoute'
-
-import { About } from "./page/About";
-import { Landmarks } from "./page/Landmarks";
-import { DayPlanner } from "./page/DayPlanner";
-import { Profile } from "./page/Profile";
-import { TripLog } from "./page/TripLog";
-import { TripLogEdit } from "./page/TripLogEdit";
-import { LandmarkPrivate } from "./page/LandmarkPrivate";
-import { Home } from "./page/Home";
 import { Banner } from "./header/Banner";
-import { Login } from './page/Login';
-import { SignUp } from './page/SignUp';
+
+import { Home } from "./loggedOutPage/Home";
+import { About } from "./loggedOutPage/About";
+import { Landmarks } from "./loggedOutPage/Landmarks";
+import { Login } from './loggedOutPage/Login';
+import { SignUp } from './loggedOutPage/SignUp';
+
+import { Profile } from "./loggedInPage/Profile";
+import { TripLog } from "./loggedInPage/TripLog";
+import { TripLogEdit } from "./loggedInPage/TripLogEdit";
+import { LandmarkPrivate } from "./loggedInPage/LandmarkPrivate";
+import { DayPlanner } from "./loggedInPage/DayPlanner";
 
 
 
@@ -27,10 +28,10 @@ function App() {
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/landmarks/:location" component={Landmarks} />
-        <ProtectedRoute exact path="/day_planner" component={DayPlanner} />
-        <ProtectedRoute exact path="/profile" component={Profile} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/sign-up" component={SignUp} />
+        <ProtectedRoute exact path="/day_planner" component={DayPlanner} />
+        <ProtectedRoute exact path="/profile" component={Profile} />
         <ProtectedRoute exact path="/profile/trip_log" component={TripLog} />
         <ProtectedRoute exact path="/profile/trip_log/edit" component={TripLogEdit} />
         <ProtectedRoute exact path="/profile/landmarks/:id" component={LandmarkPrivate} />
