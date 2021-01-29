@@ -1,7 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 
 import { NavBar } from './header/NavBar'
-
 import { About } from "./page/About";
 import { Landmarks } from "./page/Landmarks";
 import { Landmark } from "./page/Landmark";
@@ -14,11 +13,15 @@ import { Home } from "./page/Home";
 import { Banner } from "./header/Banner";
 
 
+
 function App() {
+  
+
   return (
     <div>
       <NavBar />
       <Banner />
+      
       <Switch>
         <Route exact path="/about" component={About} />
         <Route exact path="/landmarks/:location" component={Landmarks} />
