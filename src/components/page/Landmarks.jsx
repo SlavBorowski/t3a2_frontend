@@ -61,6 +61,7 @@ export function Landmarks() {
   }, [offset, count])
 
   function loadList() {
+    window.scrollTo(0, 0);
     apiGet(
       "radius",
       `radius=1000&limit=${pageLength}&offset=${offset}&lon=${locationPos[0]}&lat=${locationPos[1]}&rate=2&format=json`
