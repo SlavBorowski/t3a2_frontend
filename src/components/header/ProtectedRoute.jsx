@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { NavBar } from "./NavBar";
 
 export function ProtectedRoute({ exact, path, component }) {
   const [auth, setAuth] = useState(false);
@@ -9,7 +8,8 @@ export function ProtectedRoute({ exact, path, component }) {
   useEffect(() => {
     async function checkAuthStatus() {
       try {
-        const response = await fetch("http://localhost:3000/status", {
+        // console.log("Start of Auth Process:" + localStorage.getItem("token"));
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/status`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -18,7 +18,12 @@ export function ProtectedRoute({ exact, path, component }) {
           throw new Error("not authorized");
         } else {
           const { jwt } = await response.json();
-          localStorage.setItem("token", jwt);
+          if(jwt) {
+            console.log("jwt: " + jwt)
+            console.log("Before Set Token in Protected Route:" + localStorage.getItem("token"));
+            localStorage.setItem("token", jwt);
+            console.log("After Set Token in Protected Route:" + localStorage.getItem("token"));
+          }
           setAuth(true);
           setLoading(false);
         }
@@ -36,7 +41,6 @@ export function ProtectedRoute({ exact, path, component }) {
     return (
       !loading && (
         <>
-          <NavBar />
           <Route exact={exact} path={path} component={component} />
         </>
       )
