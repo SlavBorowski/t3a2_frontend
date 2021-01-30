@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { LoggedOutNav } from '../header/LoggedOutNav'
+import React, { useState, useContext } from "react";
+import { LoginContext } from '../App';
 
 export function Login({ history }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errMessage, setErrMessage] = useState("");
+  const { setLogin } = useContext(LoginContext);
 
   async function onFormSubmit(event) {
     event.preventDefault();
@@ -12,7 +13,7 @@ export function Login({ history }) {
       auth: { email, password },
     };
     try {
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -24,6 +25,7 @@ export function Login({ history }) {
       } else {
         const { jwt } = await response.json();
         localStorage.setItem("token", jwt);
+        setLogin(true);
         history.push("/profile");
       }
     } catch (err) {
@@ -33,7 +35,6 @@ export function Login({ history }) {
 
   return (
     <>
-      <LoggedOutNav />
       <h1>Login</h1>
       {errMessage && <span>{errMessage}</span>}
       <form onSubmit={onFormSubmit}>

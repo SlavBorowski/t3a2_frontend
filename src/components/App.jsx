@@ -1,4 +1,5 @@
 import { Route, Switch } from "react-router-dom";
+import { createContext, useEffect, useState } from 'react';
 
 import { NavBar } from './header/NavBar'
 import { ProtectedRoute } from './header/ProtectedRoute'
@@ -16,12 +17,24 @@ import { TripLogEdit } from "./loggedInPage/TripLogEdit";
 import { LandmarkPrivate } from "./loggedInPage/LandmarkPrivate";
 import { DayPlanner } from "./loggedInPage/DayPlanner";
 
-
+// export const UserContext = createContext()
+export const LoginContext = createContext({
+  login: false,
+  setLogin: () => {}
+});
 
 function App() {
+
+  const [login, setLogin] = useState(false);
+  const value = { login, setLogin };
+
+  useEffect(() => {
+    localStorage.getItem("token") ? setLogin(true) : setLogin(false)
+  }, [])
+  
   
   return (
-    <div>
+    <LoginContext.Provider value={value}>
       <NavBar />
       <Banner />
       
@@ -37,7 +50,7 @@ function App() {
         <ProtectedRoute exact path="/profile/landmarks/:id" component={LandmarkPrivate} />
         <Route exact path="/" component={Home} />
       </Switch>
-    </div>
+      </LoginContext.Provider>
   );
 }
 

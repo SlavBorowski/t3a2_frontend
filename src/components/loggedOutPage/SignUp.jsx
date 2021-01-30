@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { LoggedOutNav } from '../header/LoggedOutNav'
 
 export function SignUp({ history }) {
   const [email, setEmail] = useState("");
@@ -27,7 +26,7 @@ export function SignUp({ history }) {
         });
         const { jwt } = await response.json();
         localStorage.setItem("token", jwt);
-        history.push("/subscriptions");
+        history.push("/profile");
       }
     } catch (err) {
       console.log(err.message);
@@ -36,7 +35,6 @@ export function SignUp({ history }) {
 
   return (
     <>
-      <LoggedOutNav />
       <h1>Sign Up</h1>
       <form onSubmit={onFormSubmit}>
         <label htmlFor="email">Email</label>
