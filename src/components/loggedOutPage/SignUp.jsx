@@ -1,11 +1,11 @@
 import { Route } from 'react-router-dom'
 import { UserForm } from './UserForm'
 
-export function SignUp(props) {
+export function SignUp() {
 
   return (
     <>
-      <h1>Sign Up</h1>
+      <h2>Sign Up</h2>
       <Route component={UserForm} />
     </>
   );

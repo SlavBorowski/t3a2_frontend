@@ -1,9 +1,9 @@
-import { SubPageBody } from '../../styles/App';
-import { AboutWrapper } from '../../styles/About'
+import { AboutWrapper } from '../../styles/App';
+
 export function About() {
   return (
-    <SubPageBody>
-      <h1>About</h1>
+    <>
+      <h2>About</h2>
       <AboutWrapper>As avid travelling photographers, we've searched the internet and found few useful tools for use 
         in planning photography expeditions around the globe, so we’ve decided to put together our own. 
         By using the data provided by OpenTripMap and Wikipedia you’ll be able to view various cities 
@@ -13,6 +13,6 @@ export function About() {
         any photos you would like to use as a reference for your visit. At the end of each day you can
         add reflections and upload all of your photos to keep as a travel journal or to use as a
         reference for any future visits.</AboutWrapper>
-    </SubPageBody>
+    </>
   );
 }

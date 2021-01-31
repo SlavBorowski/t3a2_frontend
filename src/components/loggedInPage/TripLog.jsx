@@ -2,7 +2,7 @@
 export function TripLog() {
   return (
     <>
-      <h1>TripLog</h1>
+      <h2>TripLog</h2>
     </>
   );
 }

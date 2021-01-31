@@ -4,7 +4,7 @@ import { UserForm } from './UserForm'
 export function Login() {
   return (
     <>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <Route component={UserForm} />
     </>
   );

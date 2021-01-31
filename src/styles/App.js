@@ -4,6 +4,11 @@ export const HomePageBody = styled.div`
   text-align: center;
 `;
 
+export const AboutWrapper = styled.p`
+  font-size: large;
+
+`;
+
 export const SubPageBody = styled.div`
   max-width: 1500px;
   margin: 0px auto;

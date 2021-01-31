@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { SubPageBody, LandmarkListFooter, ListButton } from '../../styles/App';
+import { LandmarkListFooter, ListButton } from '../../styles/App';
 import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
 // import {landmarksSearch} from '../../api/openTripMap/landmarksSearch'
 import {apiGet} from '../../api/openTripMap/apiGet'
@@ -95,7 +95,7 @@ export function Landmarks() {
   }
 
   return (
-    <SubPageBody>
+    <>
       <h2 id="info">Loading...</h2>
       <div id="landmarks_list">
         {landmarks && landmarks.map((landmark) =>
@@ -115,6 +115,6 @@ export function Landmarks() {
         </ListButton>
       </LandmarkListFooter>
       <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
-    </SubPageBody>
+    </>
   );
 }

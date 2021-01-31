@@ -1,8 +1,7 @@
-
 export function TripLogEdit() {
   return (
     <>
-      <h1>TripLogEdit</h1>
+      <h2>TripLogEdit</h2>
     </>
   );
 }
