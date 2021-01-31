@@ -23,7 +23,8 @@ export function Landmarks() {
         message = "Landmarks for " + data.name + ", " + getCountryName(data.country);
         setLocationPos([data.lon, data.lat]);
       }
-      document.getElementById("info").innerHTML = `${message}`;
+      let messageHeading = document.getElementById("info")
+      if(messageHeading) messageHeading.innerHTML = `${message}`;
     }).then(() => {
       apiGet(
         "radius",
@@ -86,8 +87,10 @@ export function Landmarks() {
     }
 
     let repeatWarning = document.getElementById("repeat_warning");
-    repeatWarning.style.visibility = "hidden";
-    if(uniqueArray.length < pageLength) repeatWarning.style.visibility = "visible";
+    if(repeatWarning){
+      repeatWarning.style.visibility = "hidden";
+      if(uniqueArray.length < pageLength) repeatWarning.style.visibility = "visible";
+    }
     return uniqueArray;
   }
 
