@@ -1,8 +1,7 @@
-
 export function DayPlanner() {
   return (
     <>
-      <h1>DayPlanner</h1>
+      <h2>DayPlanner</h2>
     </>
   );
 }

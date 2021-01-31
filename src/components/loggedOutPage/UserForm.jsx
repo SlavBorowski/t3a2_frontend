@@ -71,9 +71,6 @@ export function UserForm(props) {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {props.location.pathname === "/sign-up" && 
-        <p>Test for sign up</p>
-        }
         <input type="submit" value="Submit" />
       </form>
     </>
