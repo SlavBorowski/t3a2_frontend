@@ -18,12 +18,7 @@ export function ProtectedRoute({ exact, path, component }) {
           throw new Error("not authorized");
         } else {
           const { jwt } = await response.json();
-          if(jwt) {
-            console.log("jwt: " + jwt)
-            console.log("Before Set Token in Protected Route:" + localStorage.getItem("token"));
-            localStorage.setItem("token", jwt);
-            console.log("After Set Token in Protected Route:" + localStorage.getItem("token"));
-          }
+          if(jwt) localStorage.setItem("token", jwt);
           setAuth(true);
           setLoading(false);
         }
