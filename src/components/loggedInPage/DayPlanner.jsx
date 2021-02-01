@@ -4,14 +4,14 @@
 
 import { useEffect, useState } from 'react';
 import { LandmarkListFooter, ListButton } from '../../styles/App';
-import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
+import { LandmarkCardLinks } from '../body/LandmarkCard/LandmarkCardLinks'
 // import {landmarksSearch} from '../../api/openTripMap/landmarksSearch'
 import {apiGet} from '../../api/openTripMap/apiGet'
 import { getCountryName } from '../../api/openTripMap/directoryScript'
 
 export function DayPlanner() {
 
-  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [locationPos, setLocationPos] = useState([0,0]);
@@ -22,16 +22,34 @@ export function DayPlanner() {
 
   useEffect(() =>{
 
-    onFormSubmit();
+    onSearchLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   },[locationPos[0]]);
 
+  async function onSaveTrip(e){
+    e.preventDefault()
 
- function onFormSubmit(e){
+      try {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/trips`, {
+          method: "POST",
+          headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}`},
+          body: JSON.stringify({ trip: { title, date, city } })
+        });
+        if (response.status >= 400) {
+          throw new Error("incorrect credentials");
+        } else {
+          console.log("Trip saved successfully.");
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+  }
+
+ function onSearchLocation(e){
   if(e) { e.preventDefault() }
-  if(location){
+  if(city){
   console.log("Retrieving Location Data");
-  apiGet("geoname", "name=" + location).then(function(data) {
+  apiGet("geoname", "name=" + city).then(function(data) {
     let message = "Please search for a valid location";
     if (data.status === "OK") {
       console.log(data);
@@ -51,7 +69,7 @@ export function DayPlanner() {
   
   });
 
-  console.log("Location:" + location);
+  console.log("City:" + city);
   console.log("LocationPos:" + locationPos);
   
   }
@@ -116,7 +134,19 @@ function getUnique(array){
     <>
       <h2>DayPlanner</h2>
 
-      <form>
+        <form onSubmit={onSearchLocation}>
+          <label htmlFor="city">City: </label>
+          <input
+            type="text"
+            name="city"
+            id="city"
+            placeholder="Search..."
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <input type="submit" value="Submit" />
+        </form>  
+        <form onSubmit={onSaveTrip}>
         <label htmlFor="title">Title:</label>
         <input
           type="title"
@@ -133,28 +163,14 @@ function getUnique(array){
           value={date}
          onChange={(e) => setDate(e.target.value)}
         />    
-        <input type="submit" value="Save" />
-      </form>
-
-      <form onSubmit={onFormSubmit}>
-        <label htmlFor="location">City: </label>
-        <input
-          type="text"
-          name="location"
-          id="location"
-          placeholder="Search..."
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Save Trip" />
       </form>
    
-
     <>
     <h2 id="info">Loading...</h2>
     <div id="landmarks_list">
       {landmarks && landmarks.map((landmark) =>
-        <LandmarkCard 
+        <LandmarkCardLinks 
           key={landmark.name} 
           name={landmark.name}
           id={landmark.xid}/>
