@@ -4,7 +4,8 @@ import {
   PlanWrapper, 
   LandmarkWrapper, 
   ItineraryWrapper,
-  Title } from '../../styles/DayPlanner.js'
+  Title,
+  PlannerInput } from '../../styles/DayPlanner.js'
 
 
 import { useEffect, useState } from 'react';
@@ -22,7 +23,7 @@ export function DayPlanner(props) {
   const [landmarks, setLandmarks] = useState();
   const [offset, setOffset] = useState(0);
   const [count, setCount] = useState(0);
-  const pageLength = 5;
+  const pageLength = 10;
 
   // Saves trip information to rails server database
   async function onSaveTrip(e){
@@ -89,7 +90,7 @@ export function DayPlanner(props) {
               id="city"
               placeholder="Please enter a destination..."
             />
-            <input type="submit" value="Search" />
+            <PlannerInput type="submit" value="Search" />
           </form><br/>  
           <form onSubmit={onSaveTrip}>
           <label htmlFor="title">Title:</label>
@@ -108,7 +109,7 @@ export function DayPlanner(props) {
             value={date}
           onChange={(e) => setDate(e.target.value)}
           /><br/><br/> 
-          <input type="submit" value="Save Trip" />
+          <PlannerInput type="submit" value="Save Trip" />
         </form>
         <ItineraryWrapper>
 

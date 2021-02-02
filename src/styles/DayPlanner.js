@@ -14,6 +14,8 @@ export const PlanWrapper = styled.div`
 export const LandmarkWrapper = styled.div`
   max-width: 50%;
   padding: 0px 20px;
+  max-height: 500px;
+  overflow-y: scroll;
 `;
 
 export const ItineraryWrapper = styled.div`
@@ -23,5 +25,14 @@ export const ItineraryWrapper = styled.div`
 export const Title = styled.h2`
   font-size: 40px;
   text-align: center;
+`;
+
+export const PlannerInput = styled.input`
+  color: white;
+  background: black;
+  border: solid 1px white;
+  height: 23px;
+  margin: 0px 5px;
+  
 `;
 
