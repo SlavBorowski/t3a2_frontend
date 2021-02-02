@@ -8,7 +8,7 @@ import {
   radiusCountSearch, 
   loadList } from '../../api/openTripMap/landmarksSearch'
 
-export function Landmarks() {
+export function Landmarks(props) {
   let { location } = useParams();
   const [locationPos, setLocationPos] = useState([0,0]);
   const [landmarks, setLandmarks] = useState([]);
@@ -51,7 +51,8 @@ export function Landmarks() {
           <LandmarkCard 
             key={landmark.name} 
             name={landmark.name}
-            id={landmark.xid}/>
+            id={landmark.xid}
+            location={props.location.pathname}/>
         )}
       </div>
       <LandmarkListFooter>
