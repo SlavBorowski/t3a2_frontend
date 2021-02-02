@@ -1,5 +1,5 @@
 
-import { SmallLandmarkCard, 
+import {
   PageWrapper, 
   PlanWrapper, 
   LandmarkWrapper, 
@@ -9,15 +9,12 @@ import { SmallLandmarkCard,
 
 import { useEffect, useState } from 'react';
 import { LandmarkListFooter, ListButton } from '../../styles/App';
-import { SmallCardLinks } from '../body/LandmarkCard/SmallCardLinks'
-// import {landmarksSearch} from '../../api/openTripMap/landmarksSearch'
-import {apiGet} from '../../api/openTripMap/apiGet'
-import { getCountryName } from '../../api/openTripMap/directoryScript'
+import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
 
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
 import { landmarksSearch, radiusCountSearch, loadList} from '../../api/openTripMap/landmarksSearch'
 
-export function DayPlanner() {
+export function DayPlanner(props) {
   const [city, setCity] = useState("");
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
@@ -51,15 +48,13 @@ export function DayPlanner() {
   useEffect(() => {
     onSearchLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city, count])
+  }, [count])
 
   function onSearchLocation(e){
     if(e) {
       e.preventDefault()
       setCity(e.target.city.value)
-    }
-    if(city){
-      landmarksSearch(city)
+      landmarksSearch(e.target.city.value)
       .then(position => setLocationPos(position))
     }
   }
@@ -115,16 +110,20 @@ export function DayPlanner() {
           /><br/><br/> 
           <input type="submit" value="Save Trip" />
         </form>
+        <ItineraryWrapper>
+
+        </ItineraryWrapper>
       </PlanWrapper>
 
     <LandmarkWrapper>
       <h2 id="info">Please search for a valid location</h2>
       <div id="landmarks_list">
         {landmarks && landmarks.map((landmark) =>
-          <SmallCardLinks 
+          <LandmarkCard 
             key={landmark.name} 
             name={landmark.name}
-            id={landmark.xid}/>
+            id={landmark.xid}
+            location={props.location.pathname}/>
         )}
       </div>
       <LandmarkListFooter>

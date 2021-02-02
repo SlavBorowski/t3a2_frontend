@@ -15,7 +15,7 @@ export const SmallLandmarkCard = styled.div`
 }
 `;
 
-export const ThumbnailImage = styled.div`
+export const SmallThumbnailImage = styled.div`
   background-image: url("${(props) => props.src}");
   background-position: center center;
   background-repeat: no-repeat;
@@ -38,17 +38,17 @@ export const ThumbnailImage = styled.div`
   }
 `;
 
-export const CardBody = styled.div`
+export const SmallCardBody = styled.div`
   height: 90px;
   overflow: hidden;
   margin: 5px 20px;
 `;
 
-export const CardTitle = styled.h2`
+export const SmallCardTitle = styled.h2`
   margin: 5px 0px;
   font-size: 20px;
 `;
 
-export const CardText = styled.p`
+export const SmallCardText = styled.p`
   margin: 5px 0px;
 `;
