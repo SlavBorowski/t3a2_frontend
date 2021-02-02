@@ -12,7 +12,7 @@ export const PlanWrapper = styled.div`
 `;
 
 export const LandmarkWrapper = styled.div`
-  max-width: 50%;
+  
   padding: 0px 20px;
   max-height: 500px;
   overflow-y: scroll;
@@ -34,5 +34,13 @@ export const PlannerInput = styled.input`
   height: 23px;
   margin: 0px 5px;
   
+`;
+
+export const LocationContainer = styled.div`
+  max-width: 50%;  
+`;
+
+export const LocationHeader = styled.h2`
+padding: 0px 20px;
 `;
 

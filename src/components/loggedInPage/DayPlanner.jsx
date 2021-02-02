@@ -5,7 +5,9 @@ import {
   LandmarkWrapper, 
   ItineraryWrapper,
   Title,
-  PlannerInput } from '../../styles/DayPlanner.js'
+  PlannerInput,
+  LocationContainer, 
+  LocationHeader} from '../../styles/DayPlanner.js'
 
 
 import { useEffect, useState } from 'react';
@@ -116,8 +118,9 @@ export function DayPlanner(props) {
         </ItineraryWrapper>
       </PlanWrapper>
 
+    <LocationContainer>
+    <LocationHeader id="info">Please search for a valid location</LocationHeader>
     <LandmarkWrapper>
-      <h2 id="info">Please search for a valid location</h2>
       <div id="landmarks_list">
         {landmarks && landmarks.map((landmark) =>
           <LandmarkCard 
@@ -138,6 +141,7 @@ export function DayPlanner(props) {
       </LandmarkListFooter>
       <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
     </LandmarkWrapper>
+    </LocationContainer>
   </PageWrapper>
   </>
   );
