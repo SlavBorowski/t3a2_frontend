@@ -52,3 +52,26 @@ export const SmallCardTitle = styled.h2`
 export const SmallCardText = styled.p`
   margin: 5px 0px;
 `;
+
+export const DetailsButton = styled.button`
+  color: white;
+  background: black;
+  border: solid 1px white;
+  margin: 0px 5px;
+`;
+
+export const AddButton = styled.button`
+  color: white;
+  background: black;
+  border: solid 1px white;
+  height: 23px;
+  margin: 0px 5px;
+  
+`;
+
+export const CardButtons = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  height: 23px;
+  
+`;

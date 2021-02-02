@@ -8,7 +8,10 @@ import {
   SmallThumbnailImage,
   SmallCardBody, 
   SmallCardTitle,
-  SmallCardText } from '../../../styles/SmallLandmarkCard';
+  SmallCardText,
+  DetailsButton,
+  AddButton,
+  CardButtons } from '../../../styles/SmallLandmarkCard';
 
 import { useEffect, useState} from 'react';
 import {apiGet} from '../../../api/openTripMap/apiGet'
@@ -50,6 +53,7 @@ export function LandmarkCard(props) {
         <SmallLandmarkCard>
           <SmallThumbnailImage src={landmarkImageSrc}/>
           <SmallCardBody>
+            <CardButtons><DetailsButton>Details</DetailsButton><AddButton>Add/Edit</AddButton></CardButtons>
             <SmallCardTitle>{props.name}</SmallCardTitle>
             <SmallCardText>{landmarkDescription}</SmallCardText>
           </SmallCardBody>
