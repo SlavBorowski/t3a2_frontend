@@ -1,10 +1,26 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 export function ProfileForm(props) {
   const [file, setFile] = useState("");
   const [name, setName] = useState("");
   const [favorite_place, setFavPlace] = useState("");
   const [bio, setBio] = useState("");
+  const [message, setMessage] = useState("no_profile")
+
+  useEffect(() => {
+      fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
+        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
+      })
+      .then((res) => res.json())
+      .then((profile) => {
+        if(profile.message !== "no_profile") {
+          setMessage(profile.message)
+          setName(profile.name);
+          setFavPlace(profile.favorite_place);
+          setBio(profile.bio);
+        }
+      });
+  }, []);
 
   async function onFormSubmit(e) {
     e.preventDefault();
@@ -14,11 +30,18 @@ export function ProfileForm(props) {
     formData.append("favorite_place", favorite_place);
     formData.append("bio", bio);
     try {
+      if(message === "profile") {
+        await fetch("http://localhost:3000/profile", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${localStorage.getItem("token")}`
+          }
+        });
+      }
       const response = await fetch("http://localhost:3000/profile", {
         method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
+        headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
         body: formData,
       });
       if (response.status >= 400) {

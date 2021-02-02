@@ -9,7 +9,7 @@ export function NavBar() {
   const history = useHistory();
   const { login, setLogin } = useContext(LoginContext);
 
-  function logout(e) {
+  function logout() {
     localStorage.removeItem("token");
     setLogin(false);
     history.push("/")
