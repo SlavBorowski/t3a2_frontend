@@ -5,7 +5,6 @@ import { SearchBar } from "./Searchbar";
 
 
 export function Banner() {
-  const [query, setQuery] = useState("");
 
   return (
     <BannerWrapper>
