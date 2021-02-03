@@ -9,7 +9,7 @@ export function Banner() {
   return (
     <BannerWrapper>
       <BannerText>The Travelling Photographer</BannerText>
-      <SearchBar setQuery={setQuery} />
+      <SearchBar />
     </BannerWrapper>
   );
 }
