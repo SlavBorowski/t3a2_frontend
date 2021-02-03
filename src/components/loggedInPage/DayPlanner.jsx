@@ -29,6 +29,9 @@ export function DayPlanner(props) {
   const [count, setCount] = useState(0);
   const pageLength = 5;
 
+  //Text is used to update DOM when new itinerary items are pushed, do not remove
+  const [text, setText] = useState("Please add landmarks to itinerary");
+
   // Saves trip information to rails server database
   async function onSaveTrip(e){
     e.preventDefault()
@@ -47,18 +50,6 @@ export function DayPlanner(props) {
         console.log(err.message);
       }
   }
-
-  useEffect(() => {
-    if(landmarks){
-      if(landmarks.length > 0){
-        setItineraryItems([{
-          "name": landmarks[0].name,
-          "xid": landmarks[0].xid,
-          "time": "2:00PM"
-        }])
-      }
-    }
-  }, [landmarks])
 
   // onSearchLocation is triggered when the city search form is submitted
   // UseEffect is used to ensure that the effects keep triggering until the correct values are set
@@ -85,7 +76,7 @@ export function DayPlanner(props) {
 
   // Update list load with updates to locationPos and offset
   useEffect(() => {
-    loadList(locationPos, pageLength, offset)
+    loadList(locationPos, pageLength, offset, true)
     .then(landmarkItemArr => setLandmarks(landmarkItemArr))
 
     SetLandmarkListFooter(offset, pageLength, count)
@@ -127,20 +118,20 @@ export function DayPlanner(props) {
           /><br/>
           <ItineraryWrapper>
             <h3>Itinerary: </h3>
-            {itineraryItems && itineraryItems.map((itineraryItem) =>
+            {itineraryItems && itineraryItems.map((itineraryItem, index) =>
               <ItineraryItem 
-                key={itineraryItem.name} 
+                key={itineraryItem.name + index} 
                 name={itineraryItem.name}
                 time={itineraryItem.time}
                 xid={itineraryItem.xid}/>
             )}
           </ItineraryWrapper>
           <br/> 
+          {text}
+          <br/><br/> 
           <PlannerInput type="submit" value="Save Trip" />
         </form>
-        
       </PlanWrapper>
-
       <LocationContainer>
         <LocationHeader id="info">Please search for a valid location</LocationHeader>
         <LandmarkWrapper>
@@ -150,7 +141,10 @@ export function DayPlanner(props) {
                 key={landmark.name} 
                 name={landmark.name}
                 id={landmark.xid}
-                location={props.location.pathname}/>
+                location={props.location.pathname}
+                setItineraryItems={setItineraryItems}
+                itineraryItems={itineraryItems}
+                setText={setText}/>
             )}
           </div>
           <LandmarkListFooter>

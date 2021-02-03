@@ -21,7 +21,6 @@ export function LandmarkCard(props) {
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
   const [listType, setListType] = useState("list");
 
-
   function LandmarkPopup() {
     return (
       <SmallLandmarkCard>
@@ -76,6 +75,11 @@ export function LandmarkCard(props) {
               <PopupModal 
                 type={'add_edit'}
                 title={<LandmarkPopup />}
+                name={props.name}
+                xid={props.id}
+                setItineraryItems={props.setItineraryItems}
+                itineraryItems={props.itineraryItems}
+                setText={props.setText}
               />
             </CardButtons>
             <SmallCardTitle>{props.name}</SmallCardTitle>

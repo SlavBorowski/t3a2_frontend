@@ -29,7 +29,7 @@ export function ItineraryItem (props) {
       <SmallLandmarkCard>
         <SmallThumbnailImage src={landmarkImageSrc}/>
         <SmallCardBody>
-          <SmallCardTitle>{props.time} <br /> {props.name}</SmallCardTitle>
+          <SmallCardTitle>{props.time}: <br /> {props.name}</SmallCardTitle>
         </SmallCardBody>
       </SmallLandmarkCard>
     </>

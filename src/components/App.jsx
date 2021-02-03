@@ -19,7 +19,6 @@ import { TripLogEdit } from "./loggedInPage/TripLogEdit";
 import { LandmarkPrivate } from "./loggedInPage/LandmarkPrivate";
 import { DayPlanner } from "./loggedInPage/DayPlanner";
 
-// export const UserContext = createContext()
 export const LoginContext = createContext({
   login: false,
   setLogin: () => {}
