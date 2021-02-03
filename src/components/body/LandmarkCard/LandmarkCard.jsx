@@ -9,17 +9,30 @@ import {
   SmallCardBody, 
   SmallCardTitle,
   SmallCardText,
-  DetailsButton,
-  AddButton,
   CardButtons } from '../../../styles/SmallLandmarkCard';
 
 import { useEffect, useState} from 'react';
 import {apiGet} from '../../../api/openTripMap/apiGet'
 
+import {PopupModal} from './PopupModal'
+
 export function LandmarkCard(props) {
   const [landmarkDescription, setLandmarkDescription] = useState();
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
   const [listType, setListType] = useState("list");
+
+
+  function LandmarkPopup() {
+    return (
+      <SmallLandmarkCard>
+        <SmallThumbnailImage src={landmarkImageSrc}/>
+        <SmallCardBody>
+          <SmallCardTitle>{props.name}</SmallCardTitle>
+          <SmallCardText>{landmarkDescription}</SmallCardText>
+        </SmallCardBody>
+      </SmallLandmarkCard>
+    )
+  }
 
   // Runs on ComponentDidMount once and will set the landmark image/description
   useEffect(() => {
@@ -53,7 +66,18 @@ export function LandmarkCard(props) {
         <SmallLandmarkCard>
           <SmallThumbnailImage src={landmarkImageSrc}/>
           <SmallCardBody>
-            <CardButtons><DetailsButton>Details</DetailsButton><AddButton>Add/Edit</AddButton></CardButtons>
+            <CardButtons>
+              <PopupModal 
+                type={'details'}
+                title={props.name}
+                content={landmarkDescription}
+                img_src={landmarkImageSrc}
+              />
+              <PopupModal 
+                type={'add_edit'}
+                title={<LandmarkPopup />}
+              />
+            </CardButtons>
             <SmallCardTitle>{props.name}</SmallCardTitle>
             <SmallCardText>{landmarkDescription}</SmallCardText>
           </SmallCardBody>
