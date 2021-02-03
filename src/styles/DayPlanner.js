@@ -3,12 +3,17 @@ import styled from "styled-components";
 export const PageWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 `;
 
 export const PlanWrapper = styled.div`
   max-width: 40%;
   padding: 25px 20px;
   font-size: large;
+
+  @media (max-width: 500px) {
+    max-width: 100%;
+  }
 `;
 
 export const LandmarkWrapper = styled.div`
@@ -38,6 +43,10 @@ export const PlannerInput = styled.input`
 
 export const LocationContainer = styled.div`
   max-width: 50%;  
+
+  @media (max-width: 500px) {
+    max-width: 100%;
+  }
 `;
 
 export const LocationHeader = styled.h2`

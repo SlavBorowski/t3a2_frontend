@@ -11,7 +11,7 @@ export const SmallLandmarkCard = styled.div`
 
   @media (max-width: 420px) {
     display: block;
-    height: 400px;
+    height: 270px;
 }
 `;
 
@@ -51,6 +51,8 @@ export const SmallCardTitle = styled.h2`
 
 export const SmallCardText = styled.p`
   margin: 5px 0px;
+  font-weight: normal;
+  font-size: 16px;
 `;
 
 export const DetailsButton = styled.button`

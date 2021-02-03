@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavButton, SearchInput, SearchForm } from '../../styles/Searchbar'
 
-export function SearchBar(props) {
+export function SearchBar() {
   const [location, setLocation] = useState("");
 
   return (
