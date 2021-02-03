@@ -1,4 +1,3 @@
-
 import { BannerWrapper, BannerText } from '../../styles/header'
 import { SearchBar } from "./Searchbar";
 

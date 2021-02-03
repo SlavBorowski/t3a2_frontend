@@ -31,7 +31,7 @@ export function ProfileForm(props) {
     formData.append("bio", bio);
     try {
       if(message === "profile") {
-        await fetch("http://localhost:3000/profile", {
+        await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export function ProfileForm(props) {
           }
         });
       }
-      const response = await fetch("http://localhost:3000/profile", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
         method: "POST",
         headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
         body: formData,
