@@ -44,6 +44,13 @@ export const SmallCardBody = styled.div`
   margin: 5px 20px;
 `;
 
+export const SmallCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between
+`;
+
+
+
 export const SmallCardTitle = styled.h2`
   margin: 5px 0px;
   font-size: 20px;
