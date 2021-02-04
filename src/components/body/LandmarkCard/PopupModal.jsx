@@ -16,16 +16,23 @@ import {
 
 export function PopupModal(props) {
   let buttonValue = "Details"
-  if(props.type === "add_edit") buttonValue = "Add/Edit"
+  if(props.type === "add") buttonValue = "Add"
+  if(props.type === "edit") buttonValue = "Edit"
 
   const [time, setTime] = useState("12:00")
   const [notes, setNotes] = useState("")
 
-  function onItinerarySave(e) {
+  function onItinerarySave(e, type) {
     e.preventDefault();
-    // console.log(time)
+    let itemId = props.itineraryItems.length;
+    if(type === "edit") {
+      props.itineraryItems.splice(props.itineraryItems.findIndex( item => item.id === props.id ), 1);
+      itemId = props.id
+    }
+
     props.itineraryItems.push(
       {
+        "id": itemId,
         "name": props.name,
         "xid": props.xid,
         "time": time,
@@ -34,7 +41,15 @@ export function PopupModal(props) {
     )
     props.itineraryItems.sort( CompareTime );
     props.setItineraryItems(props.itineraryItems)
-    props.setText(`You're visiting ${props.itineraryItems.length} landmarks today`)
+    if(type === "add") props.setText(`You're visiting ${props.itineraryItems.length} landmarks today`)
+    if(type === "edit") props.setText(`Visiting ${props.name} is now set to ${time}`)
+    // console.log(props.itineraryItems)
+  }
+
+  function onItineraryRemove(e) {
+    e.preventDefault();
+      props.itineraryItems.splice(props.itineraryItems.findIndex( item => item.id === props.id ), 1);
+      props.setText(`Removed ${props.name} from itinerary`)
   }
 
   return (
@@ -60,31 +75,40 @@ export function PopupModal(props) {
             </>:
             <>
               <ModalSubHeading>Add/Edit POI to itinerary:</ModalSubHeading>
-              <form >
-                <label htmlFor="time">Time:</label><br />
-                <input
-                  type="time"
-                  name="time"
-                  id="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                /><br/><br/>
-                <label htmlFor="notes">Notes:</label><br />
-                <textarea 
-                  id="notes" 
-                  name="notes" 
-                  cols="40" 
-                  rows="5"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}/>
-                <br /><br />
-                <input type="submit" value="Save to itinerary" onClick={(e) => {
-                  onItinerarySave(e)
+
+              <label htmlFor="time">Time:</label><br />
+              <input
+                type="time"
+                name="time"
+                id="time"
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+              /><br/><br/>
+              <label htmlFor="notes">Notes:</label><br />
+              <textarea 
+                id="notes" 
+                name="notes" 
+                cols="40" 
+                rows="5"
+                value={notes}
+                onChange={(e) => setNotes(e.target.value)}/>
+              <br /><br />
+              { props.type === "edit" ? 
+              <>
+                <input type="submit" value="Edit itinerary item" onClick={(e) => {
+                  onItinerarySave(e, "edit")
                   close();
                 }}/>
-              </form>
-              <br />
-              <button>Remove from itinerary</button>
+                <input type="submit" value="Remove itinerary item" onClick={(e) => {
+                  onItineraryRemove(e)
+                  close();
+                }}/>
+              </>
+              :
+              <input type="submit" value="Add itinerary item" onClick={(e) => {
+                onItinerarySave(e, "add")
+                close();
+              }}/>}
               <button onClick={close}>Close</button>
             </>
             }

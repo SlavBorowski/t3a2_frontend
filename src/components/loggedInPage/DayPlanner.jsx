@@ -9,11 +9,9 @@ import {
   LocationContainer, 
   LocationHeader} from '../../styles/DayPlanner.js'
 
-
 import { useEffect, useState } from 'react';
 import { LandmarkListFooter, ListButton } from '../../styles/App';
 import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
-import { ItineraryItem } from '../body/DayPlannerForm/ItineraryItem'
 
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
 import { landmarksSearch, radiusCountSearch, loadList} from '../../api/openTripMap/landmarksSearch'
@@ -100,67 +98,72 @@ export function DayPlanner(props) {
             <PlannerInput type="submit" value="Search" />
           </form><br/>  
           <form onSubmit={onSaveTrip}>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="title"
-            name="title"
-            id="title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          /><br/><br/>
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            name="date"
-            id="date"
-            value={date}
-          onChange={(e) => setDate(e.target.value)}
-          /><br/>
+            <label htmlFor="title">Title:</label>
+            <input
+              type="title"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            /><br/><br/>
+            <label htmlFor="date">Date:</label>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              value={date}
+            onChange={(e) => setDate(e.target.value)}
+            /><br/><br/>
+            <PlannerInput type="submit" value="Save Trip" />
+          </form>
+          <h3>Itinerary: </h3>
           <ItineraryWrapper>
-            <h3>Itinerary: </h3>
-            {itineraryItems && itineraryItems.map((itineraryItem, index) =>
-              <ItineraryItem 
-                key={itineraryItem.name + index} 
+            {itineraryItems && itineraryItems.map((itineraryItem) =>
+              <LandmarkCard 
+                key={itineraryItem.name  + itineraryItem.id} 
+                id={itineraryItem.id}
                 name={itineraryItem.name}
                 time={itineraryItem.time}
-                xid={itineraryItem.xid}/>
+                xid={itineraryItem.xid}
+                location={props.location.pathname}
+                setItineraryItems={setItineraryItems}
+                itineraryItems={itineraryItems}
+                setText={setText}
+                type={"itineraryItem"}/>
             )}
           </ItineraryWrapper>
           <br/> 
           {text}
-          <br/><br/> 
-          <PlannerInput type="submit" value="Save Trip" />
-        </form>
-      </PlanWrapper>
-      <LocationContainer>
-        <LocationHeader id="info">Please search for a valid location</LocationHeader>
-        <LandmarkWrapper>
-          <div id="landmarks_list">
-            {landmarks && landmarks.map((landmark) =>
-              <LandmarkCard 
-                key={landmark.name} 
-                name={landmark.name}
-                id={landmark.xid}
-                location={props.location.pathname}
-                setItineraryItems={setItineraryItems}
-                itineraryItems={itineraryItems}
-                setText={setText}/>
-            )}
-          </div>
-          <LandmarkListFooter>
-            <ListButton id="prev_button" onClick={() => setOffset(offset - pageLength)}>
-              Prev
-            </ListButton>
-            <p id="footer_message">Now showing 1-5 of </p>
-            <ListButton id="next_button" onClick={() => setOffset(offset + pageLength)}>
-              Next
-            </ListButton>
-          </LandmarkListFooter>
-          <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
-        </LandmarkWrapper>
-      </LocationContainer>
-    </PageWrapper>
-  </>
+        </PlanWrapper>
+        <LocationContainer>
+          <LocationHeader id="info">Please search for a valid location</LocationHeader>
+          <LandmarkWrapper>
+            <div id="landmarks_list">
+              {landmarks && landmarks.map((landmark) =>
+                <LandmarkCard 
+                  key={landmark.name} 
+                  name={landmark.name}
+                  xid={landmark.xid}
+                  location={props.location.pathname}
+                  setItineraryItems={setItineraryItems}
+                  itineraryItems={itineraryItems}
+                  setText={setText}/>
+              )}
+            </div>
+            <LandmarkListFooter>
+              <ListButton id="prev_button" onClick={() => setOffset(offset - pageLength)}>
+                Prev
+              </ListButton>
+              <p id="footer_message">Now showing 1-5 of </p>
+              <ListButton id="next_button" onClick={() => setOffset(offset + pageLength)}>
+                Next
+              </ListButton>
+            </LandmarkListFooter>
+            <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
+          </LandmarkWrapper>
+        </LocationContainer>
+      </PageWrapper>
+    </>
   );
 }
 

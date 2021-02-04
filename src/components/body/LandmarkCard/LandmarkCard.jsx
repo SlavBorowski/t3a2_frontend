@@ -9,7 +9,8 @@ import {
   SmallCardBody, 
   SmallCardTitle,
   SmallCardText,
-  CardButtons } from '../../../styles/SmallLandmarkCard';
+  CardButtons,
+  SmallCardHeader } from '../../../styles/SmallLandmarkCard';
 
 import { useEffect, useState} from 'react';
 import {apiGet} from '../../../api/openTripMap/apiGet'
@@ -20,6 +21,7 @@ export function LandmarkCard(props) {
   const [landmarkDescription, setLandmarkDescription] = useState();
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
   const [listType, setListType] = useState("list");
+  const [addEditType, setAddEditType] = useState("add");
 
   function LandmarkPopup() {
     return (
@@ -35,10 +37,11 @@ export function LandmarkCard(props) {
 
   // Runs on ComponentDidMount once and will set the landmark image/description
   useEffect(() => {
-    if(props.id){
+    if(props.xid){
       props.location === "/day_planner" ? setListType("planner") : setListType("list")
+      props.type === "itineraryItem" ? setAddEditType("edit") : setAddEditType("add")
       const timer = setTimeout(() => {
-        apiGet("xid/" + props.id).then(data => {
+        apiGet("xid/" + props.xid).then(data => {
           if (data.preview) setLandmarkImageSrc(data.preview.source)
           setLandmarkDescription(data.wikipedia_extracts
           ? data.wikipedia_extracts.text
@@ -50,7 +53,7 @@ export function LandmarkCard(props) {
       return () => clearTimeout(timer);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.id]);
+  }, [props.xid]);
 
   return (
       <>
@@ -65,23 +68,33 @@ export function LandmarkCard(props) {
         <SmallLandmarkCard>
           <SmallThumbnailImage src={landmarkImageSrc}/>
           <SmallCardBody>
-            <CardButtons>
-              <PopupModal 
-                type={'details'}
-                title={props.name}
-                content={landmarkDescription}
-                img_src={landmarkImageSrc}
-              />
-              <PopupModal 
-                type={'add_edit'}
-                title={<LandmarkPopup />}
-                name={props.name}
-                xid={props.id}
-                setItineraryItems={props.setItineraryItems}
-                itineraryItems={props.itineraryItems}
-                setText={props.setText}
-              />
-            </CardButtons>
+
+            <SmallCardHeader>
+              <div>
+                {props.type === "itineraryItem" &&
+                  <CardTitle>{props.time}</CardTitle>
+                }
+              </div>
+              <CardButtons>
+                <PopupModal 
+                  type={'details'}
+                  title={props.name}
+                  content={landmarkDescription}
+                  img_src={landmarkImageSrc}
+                />
+                <PopupModal 
+                  type={addEditType}
+                  title={<LandmarkPopup />}
+                  name={props.name}
+                  id={props.id}
+                  xid={props.xid}
+                  setItineraryItems={props.setItineraryItems}
+                  itineraryItems={props.itineraryItems}
+                  setText={props.setText}
+                />
+              </CardButtons>
+            </SmallCardHeader>
+            
             <SmallCardTitle>{props.name}</SmallCardTitle>
             <SmallCardText>{landmarkDescription}</SmallCardText>
           </SmallCardBody>

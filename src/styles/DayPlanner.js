@@ -17,14 +17,19 @@ export const PlanWrapper = styled.div`
 `;
 
 export const LandmarkWrapper = styled.div`
-  
   padding: 0px 20px;
   max-height: 500px;
   overflow-y: scroll;
+  border: solid 2px #CCC;
+  border-radius: 1%;
 `;
 
 export const ItineraryWrapper = styled.div`
-  
+  padding: 0px 20px;
+  max-height: 320px;
+  overflow-y: scroll;
+  border: solid 2px #CCC;
+  border-radius: 1%;
 `;
 
 export const Title = styled.h2`
