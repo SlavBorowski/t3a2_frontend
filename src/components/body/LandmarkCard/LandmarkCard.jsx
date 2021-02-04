@@ -86,6 +86,8 @@ export function LandmarkCard(props) {
                   type={addEditType}
                   title={<LandmarkPopup />}
                   name={props.name}
+                  time={props.time}
+                  notes={props.notes}
                   id={props.id}
                   xid={props.xid}
                   setItineraryItems={props.setItineraryItems}

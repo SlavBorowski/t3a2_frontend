@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CompareTime from '../../../code_functions/CompareTime'
 
 import { DetailsButton } from '../../../styles/SmallLandmarkCard';
@@ -21,6 +21,14 @@ export function PopupModal(props) {
 
   const [time, setTime] = useState("12:00")
   const [notes, setNotes] = useState("")
+
+  useEffect(() => {
+    if(props.type === "edit") {
+      setTime(props.time)
+      setNotes(props.notes)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function onItinerarySave(e, type) {
     e.preventDefault();

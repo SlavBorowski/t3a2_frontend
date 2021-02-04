@@ -11,8 +11,8 @@ export function GetUnique(array, pageLength){
 
   let repeatWarning = document.getElementById("repeat_warning");
   if(repeatWarning){
-    repeatWarning.style.visibility = "hidden";
-    if(uniqueArray.length < pageLength) repeatWarning.style.visibility = "visible";
+    repeatWarning.style.display = "none";
+    if(uniqueArray.length < pageLength) repeatWarning.style.display = "block";
   }
   return uniqueArray;
 }

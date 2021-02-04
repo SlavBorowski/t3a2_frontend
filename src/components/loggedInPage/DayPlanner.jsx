@@ -18,7 +18,7 @@ import { landmarksSearch, radiusCountSearch, loadList} from '../../api/openTripM
 
 export function DayPlanner(props) {
   const [city, setCity] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState("2021-02-04");
   const [title, setTitle] = useState("");
   const [locationPos, setLocationPos] = useState([0,0]);
   const [landmarks, setLandmarks] = useState();
@@ -41,8 +41,21 @@ export function DayPlanner(props) {
         });
         if (response.status >= 400) {
           throw new Error("incorrect credentials");
-        } else {
-          console.log("Trip saved successfully.");
+        } else { 
+          // console.log("Trip Saved")
+          itineraryItems.map(async function itineraryPost(item) {
+            const name = item.name
+            const POI_id = item.xid
+            const time = item.time
+            const notes = item.notes
+      
+            await fetch(`${process.env.REACT_APP_BACKEND_URL}/${title}/itinerary`, {
+              method: "POST",
+              headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}`},
+              body: JSON.stringify({ itinerary_item: { name, POI_id, time, notes } })
+            })
+            // console.log("Itinerary Item Saved")
+          })
         }
       } catch (err) {
         console.log(err.message);
@@ -112,6 +125,8 @@ export function DayPlanner(props) {
               name="date"
               id="date"
               value={date}
+              min="2021-01-01" 
+              max="2023-12-31"
             onChange={(e) => setDate(e.target.value)}
             /><br/><br/>
             <PlannerInput type="submit" value="Save Trip" />
@@ -124,6 +139,7 @@ export function DayPlanner(props) {
                 id={itineraryItem.id}
                 name={itineraryItem.name}
                 time={itineraryItem.time}
+                notes={itineraryItem.notes}
                 xid={itineraryItem.xid}
                 location={props.location.pathname}
                 setItineraryItems={setItineraryItems}
