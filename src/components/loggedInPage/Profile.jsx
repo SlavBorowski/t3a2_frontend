@@ -1,12 +1,21 @@
 import {useEffect, useState} from 'react';
 import { LoginContext } from '../App';
 import { useContext } from 'react';
+import { ItineraryCard } from './ItineraryCard'
+import { ProfileWrapper, 
+  ProfileButton,
+  InfoWrapper,
+  BioWrapper,
+  ImageWrapper,
+  ProfileTitle,
+  PageWrapper } from '../../styles/Profile'
 
 export function Profile(props) {
 
-  const [profile, setProfile] = useState()
+  const [profile, setProfile] = useState();
   const { setLogin } = useContext(LoginContext);
-
+  const [trips, setTrips] = useState([]);
+  const [itineraryItems, setItineraryItems] = useState([[]]);
   useEffect(() => {
     async function getProfile() {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
@@ -22,6 +31,42 @@ export function Profile(props) {
     }
     getProfile()
   }, [props.history])
+
+  useEffect(() => {
+    async function getTrips() {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/trips`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      });
+      if (response.status >= 400) {
+        throw new Error("not authorized");
+      } else {
+        const data = await response.json()
+        console.log(data)
+        setTrips(data);
+      }
+    }
+    getTrips()
+  }, [])
+
+  useEffect(() => {
+    async function getItineraryItems() {
+      trips.map (async function getData (trip) {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${trip.id}/itinerary`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        if (response.status >= 400) {
+          throw new Error("not authorized");
+        } else {
+          const data = await response.json()
+          console.log(data)
+          setItineraryItems(itineraryItems.push(data)); 
+          // setItineraryItems(data);
+        }
+      })
+      console.log(itineraryItems);
+    }
+    getItineraryItems()
+  }, [])
 
   function onEditLinkClick(e) {
     e.preventDefault()
@@ -50,19 +95,34 @@ export function Profile(props) {
       console.log(err.message);
     }
   }
-
+//test
   return (
     <>
+    <PageWrapper>
       {profile &&
       <>
-        <h2>{profile.name}</h2>
-        <img width="200px" src={profile.image_url} alt="profile" />
-        {profile.favorite_place && <p>Favorite Place: {profile.favorite_place}</p>}
-        {profile.bio && <p>Bio: {profile.bio}</p>}
+        <ProfileTitle>{profile.name}'s Journeys</ProfileTitle>
+        <ProfileWrapper>
+          <ImageWrapper><img width="200px" src={profile.image_url} alt="profile" /></ImageWrapper>
+          <InfoWrapper>{profile.favorite_place && <><h3>Favorite Place:</h3> {profile.favorite_place}</>}</InfoWrapper>
+          <BioWrapper>{profile.bio && <><h3>Bio:</h3> {profile.bio}</>}</BioWrapper>
+        </ProfileWrapper>  
       </>
       }
-      <button onClick={(e) => onEditLinkClick(e)}>Edit Profile</button>
-      <button onClick={(e) => onDeleteLinkClick(e)}>Delete Account</button>
+      <ProfileButton onClick={(e) => onEditLinkClick(e)}>Edit Profile</ProfileButton>
+      <ProfileButton onClick={(e) => onDeleteLinkClick(e)}>Delete Account</ProfileButton>
+
+      <div>
+      {trips && trips.map((trip) =>
+          <ItineraryCard
+            key={trip.title} 
+            title={trip.title}
+            id={trip.id}
+            city={trip.city}
+            date={trip.date}/>
+        )}
+      </div>  
+    </PageWrapper>
     </>
   );
 }
