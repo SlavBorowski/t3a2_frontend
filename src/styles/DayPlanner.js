@@ -17,7 +17,7 @@ export const PlanWrapper = styled.div`
 `;
 
 export const LandmarkWrapper = styled.div`
-  padding: 0px 20px;
+  padding: 0px 4px;
   max-height: 500px;
   overflow-y: scroll;
   border: solid 2px #CCC;
@@ -25,7 +25,7 @@ export const LandmarkWrapper = styled.div`
 `;
 
 export const ItineraryWrapper = styled.div`
-  padding: 0px 20px;
+  padding: 0px 4px;
   max-height: 320px;
   overflow-y: scroll;
   border: solid 2px #CCC;

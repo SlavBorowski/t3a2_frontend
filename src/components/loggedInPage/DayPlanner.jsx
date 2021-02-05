@@ -14,7 +14,7 @@ import { LandmarkListFooter, ListButton } from '../../styles/App';
 import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
 
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
-import { landmarksSearch, radiusCountSearch, loadList} from '../../api/openTripMap/landmarksSearch'
+import { landmarksSearch, radiusCountSearch, loadList} from '../../api_open_trip_map/landmarksSearch'
 
 export function DayPlanner(props) {
   const [city, setCity] = useState("");
@@ -136,16 +136,13 @@ export function DayPlanner(props) {
             {itineraryItems && itineraryItems.map((itineraryItem) =>
               <LandmarkCard 
                 key={itineraryItem.name  + itineraryItem.id} 
-                id={itineraryItem.id}
+                itineraryItem={itineraryItem}
                 name={itineraryItem.name}
-                time={itineraryItem.time}
-                notes={itineraryItem.notes}
                 xid={itineraryItem.xid}
-                location={props.location.pathname}
+                className="small itinerary"
                 setItineraryItems={setItineraryItems}
                 itineraryItems={itineraryItems}
-                setText={setText}
-                type={"itineraryItem"}/>
+                setText={setText}/>
             )}
           </ItineraryWrapper>
           <br/> 
@@ -160,7 +157,7 @@ export function DayPlanner(props) {
                   key={landmark.name} 
                   name={landmark.name}
                   xid={landmark.xid}
-                  location={props.location.pathname}
+                  className="small"
                   setItineraryItems={setItineraryItems}
                   itineraryItems={itineraryItems}
                   setText={setText}/>

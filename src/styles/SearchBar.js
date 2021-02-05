@@ -13,16 +13,9 @@ export const NavButton = styled(NavLink)`
   background: black;
   position: relative;
   top: 2px;
-   
 `;
 
 export const SearchInput = styled.input`
   width: 250px;
   height: 31px;
- 
-`;
-
-export const SearchForm = styled.form`
- 
-  
 `;
