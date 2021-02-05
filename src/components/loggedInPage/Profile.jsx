@@ -43,7 +43,6 @@ export function Profile(props) {
         const data = await response.json()
         console.log(data)
         setTrips(data);
-        console.log(trips)
       }
     }
     getTrips()
