@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
-import { LandmarkListFooter, ListButton } from '../../styles/App';
-import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
+import LandmarkCard from '../body/LandmarkCard/LandmarkCard'
+import LandmarkListFooterHTML from '../body/LandmarkCard/LandmarkListFooterHTML'
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
 import { landmarksSearch, radiusCountSearch, loadList } from '../../api_open_trip_map/landmarksSearch'
 
-export function Landmarks(props) {
+export function Landmarks() {
   let { location } = useParams();
   const [locationPos, setLocationPos] = useState([0,0]);
   const [landmarks, setLandmarks] = useState([]);
@@ -52,15 +52,7 @@ export function Landmarks(props) {
             xid={landmark.xid}/>
         )}
       </div>
-      <LandmarkListFooter>
-        <ListButton id="prev_button" onClick={() => setOffset(offset - pageLength)}>
-          Prev
-        </ListButton>
-        <p id="footer_message">Now showing 1-5 of </p>
-        <ListButton id="next_button" onClick={() => setOffset(offset + pageLength)}>
-          Next
-        </ListButton>
-      </LandmarkListFooter>
+      <LandmarkListFooterHTML offset={offset} pageLength={pageLength} setOffset={setOffset}/>
       <p id="repeat_warning" >There are less than 5 landmarks rendered when there are repeats from the API</p>
     </>
   );
