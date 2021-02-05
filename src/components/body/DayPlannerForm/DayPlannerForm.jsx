@@ -1,3 +1,4 @@
+import {useHistory} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import SaveTrip from '../../../code_functions/SaveTrip';
 import { landmarksSearch } from '../../../api_open_trip_map/landmarksSearch';
@@ -13,6 +14,7 @@ export default function DayPlannerForm(props) {
   const [date, setDate] = useState("2021-02-04");
   const [title, setTitle] = useState("");
   const [city, setCity] = useState("");
+  const history = useHistory();
 
   function onSearchLocation(e){
     if(e) {
@@ -27,6 +29,7 @@ export default function DayPlannerForm(props) {
   function onSaveTrip(e){
     e.preventDefault()
     SaveTrip(title, date, city, props.itineraryItems) 
+    history.push("/profile")
   }
 
   // onSearchLocation is triggered when the city search form is submitted
