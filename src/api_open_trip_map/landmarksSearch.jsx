@@ -1,10 +1,10 @@
 import { apiGet } from './apiGet'
 import { getCountryName } from './directoryScript'
-import { GetUnique } from '../../code_functions/GetUnique'
+import { GetUnique } from '../code_functions/GetUnique'
 
 let returnData = []; //contains return data of functions
 
-// Returns location position data and count
+// Returns location position data
 export function landmarksSearch(location) {
   return new Promise(function(resolve, reject) {
     // console.log("Retrieving Location Data");
@@ -21,6 +21,7 @@ export function landmarksSearch(location) {
   
 }
 
+// Returns poi count based on location position
 export function radiusCountSearch(locationPos) {
   return new Promise(function(resolve, reject) {
     setTimeout(() => {
@@ -34,6 +35,7 @@ export function radiusCountSearch(locationPos) {
   });
 }
 
+// Returns poi list based on location position
 export function loadList(locationPos, pageLength, offset, scrollTop) {
   return new Promise(function(resolve, reject) {
     if(scrollTop) window.scrollTo(0, 0);

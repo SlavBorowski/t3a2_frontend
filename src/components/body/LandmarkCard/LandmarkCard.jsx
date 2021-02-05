@@ -1,107 +1,57 @@
-import {
-  CardWrapper, 
-  ThumbnailImage,
-  CardBody, 
-  CardTitle} from '../../../styles/LandmarkCard'
-import { 
-  SmallLandmarkCard,
-  SmallThumbnailImage,
-  SmallCardBody, 
-  SmallCardTitle,
-  SmallCardText,
-  CardButtons,
-  SmallCardHeader } from '../../../styles/SmallLandmarkCard';
+import { StyledLandmarkCard, CardComponents } from '../../../styles/LandmarkCard'
 
 import { useEffect, useState} from 'react';
-import {apiGet} from '../../../api/openTripMap/apiGet'
+import { detailedLandmarkFetch } from '../../../api_open_trip_map/detailedLandmarkFetch'
+import PopupModalForm from './PopupModalForm'
+import PopupModalInfo from './PopupModalInfo'
+import LandmarkPopup from './LandmarkPopup'
 
-import {PopupModal} from './PopupModal'
-
-export function LandmarkCard(props) {
+export default function LandmarkCard(props) {
   const [landmarkDescription, setLandmarkDescription] = useState();
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
-  const [listType, setListType] = useState("list");
   const [addEditType, setAddEditType] = useState("add");
-
-  function LandmarkPopup() {
-    return (
-      <SmallLandmarkCard>
-        <SmallThumbnailImage src={landmarkImageSrc}/>
-        <SmallCardBody>
-          <SmallCardTitle>{props.name}</SmallCardTitle>
-          <SmallCardText>{landmarkDescription}</SmallCardText>
-        </SmallCardBody>
-      </SmallLandmarkCard>
-    )
-  }
 
   // Runs on ComponentDidMount once and will set the landmark image/description
   useEffect(() => {
-    if(props.xid){
-      props.location === "/day_planner" ? setListType("planner") : setListType("list")
-      props.type === "itineraryItem" ? setAddEditType("edit") : setAddEditType("add")
-      const timer = setTimeout(() => {
-        apiGet("xid/" + props.xid).then(data => {
-          if (data.preview) setLandmarkImageSrc(data.preview.source)
-          setLandmarkDescription(data.wikipedia_extracts
-          ? data.wikipedia_extracts.text
-          : data.info
-          ? data.info.descr
-          : "No description")
-          })
-        }, (500));
-      return () => clearTimeout(timer);
-    }
+    props.className === "small itinerary" ? setAddEditType("edit") : setAddEditType("add")
+    detailedLandmarkFetch(props.xid, setLandmarkImageSrc, setLandmarkDescription)
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.xid]);
 
   return (
-      <>
-      {listType === "list" ?
-        <CardWrapper>
-          <ThumbnailImage src={landmarkImageSrc}/>
-          <CardBody>
-            <CardTitle>{props.name}</CardTitle>
-            <p>{landmarkDescription}</p>
-          </CardBody>
-        </CardWrapper>:
-        <SmallLandmarkCard>
-          <SmallThumbnailImage src={landmarkImageSrc}/>
-          <SmallCardBody>
+        <StyledLandmarkCard className={props.className}>
 
-            <SmallCardHeader>
-              <div>
-                {props.type === "itineraryItem" &&
-                  <CardTitle>{props.time}</CardTitle>
-                }
-              </div>
-              <CardButtons>
-                <PopupModal 
-                  type={'details'}
-                  title={props.name}
-                  content={landmarkDescription}
-                  img_src={landmarkImageSrc}
-                />
-                <PopupModal 
-                  type={addEditType}
-                  title={<LandmarkPopup />}
-                  name={props.name}
-                  time={props.time}
-                  notes={props.notes}
-                  id={props.id}
-                  xid={props.xid}
-                  setItineraryItems={props.setItineraryItems}
-                  itineraryItems={props.itineraryItems}
-                  setText={props.setText}
-                />
-              </CardButtons>
-            </SmallCardHeader>
-            
-            <SmallCardTitle>{props.name}</SmallCardTitle>
-            <SmallCardText>{landmarkDescription}</SmallCardText>
-          </SmallCardBody>
-        </SmallLandmarkCard>
-        }
-      </>
+          <CardComponents className="image" src={landmarkImageSrc}/>
+
+          <CardComponents className="body">
+            <CardComponents className="title">{props.className === "small itinerary" && props.itineraryItem.time}</CardComponents>
+            <CardComponents className="title">{props.name}</CardComponents>
+            <CardComponents className="text" >{landmarkDescription}</CardComponents>
+          </CardComponents>
+
+          <CardComponents className="button_wrapper">
+            <PopupModalInfo
+              title={props.name}
+              content={landmarkDescription}
+              img_src={landmarkImageSrc}
+            />
+            <PopupModalForm
+              type={addEditType}
+              title={
+              <LandmarkPopup 
+                name={props.name}
+                landmarkImageSrc={landmarkImageSrc}
+                landmarkDescription={landmarkDescription}/>}
+              itineraryItem={props.itineraryItem}
+              name={props.name}
+              xid={props.xid}
+              setItineraryItems={props.setItineraryItems}
+              itineraryItems={props.itineraryItems}
+              setText={props.setText}
+            />
+          </CardComponents>
+
+        </StyledLandmarkCard>
   );
 }
