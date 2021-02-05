@@ -2,15 +2,20 @@ import { ItineraryCardWrapper,
   ItineraryCardTitle, 
   ItineraryImageWrapper } from '../../styles/ItineraryCard'
 
-export function ItineraryCard() {
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function ItineraryCard(props) {
   return (
     <>
     <ItineraryCardWrapper>
-      <ItineraryCardTitle>Rome Day 1 - 19th December 2020</ItineraryCardTitle>
+      <ItineraryCardTitle>{props.title} - {props.date}</ItineraryCardTitle>
         <ItineraryImageWrapper>
 
 
         </ItineraryImageWrapper>
+        <ItineraryCardTitle>{capitalizeFirstLetter(props.city)}</ItineraryCardTitle>  
     </ItineraryCardWrapper>
     </>
   );
