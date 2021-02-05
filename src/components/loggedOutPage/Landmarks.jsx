@@ -3,10 +3,7 @@ import { useEffect, useState } from 'react';
 import { LandmarkListFooter, ListButton } from '../../styles/App';
 import { LandmarkCard } from '../body/LandmarkCard/LandmarkCard'
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
-import { 
-  landmarksSearch, 
-  radiusCountSearch, 
-  loadList } from '../../api/openTripMap/landmarksSearch'
+import { landmarksSearch, radiusCountSearch, loadList } from '../../api_open_trip_map/landmarksSearch'
 
 export function Landmarks(props) {
   let { location } = useParams();
@@ -37,6 +34,7 @@ export function Landmarks(props) {
   useEffect(() => {
     loadList(locationPos, pageLength, offset, true)
     .then(landmarkItemArr => setLandmarks(landmarkItemArr))
+    // console.log(landmarks)
 
     SetLandmarkListFooter(offset, pageLength, count)
 
@@ -51,8 +49,7 @@ export function Landmarks(props) {
           <LandmarkCard 
             key={landmark.name} 
             name={landmark.name}
-            id={landmark.xid}
-            location={props.location.pathname}/>
+            xid={landmark.xid}/>
         )}
       </div>
       <LandmarkListFooter>

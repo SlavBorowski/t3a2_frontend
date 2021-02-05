@@ -1,5 +1,5 @@
 import { BannerWrapper, BannerText } from '../../styles/header'
-import { SearchBar } from "./Searchbar";
+import { SearchBar } from "./SearchBar";
 
 
 export function Banner() {
