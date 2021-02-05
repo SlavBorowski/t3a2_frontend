@@ -15,7 +15,7 @@ export function Profile(props) {
   const [profile, setProfile] = useState();
   const { setLogin } = useContext(LoginContext);
   const [trips, setTrips] = useState([]);
-
+  const [itineraryItems, setItineraryItems] = useState([[]]);
   useEffect(() => {
     async function getProfile() {
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
@@ -46,6 +46,26 @@ export function Profile(props) {
       }
     }
     getTrips()
+  }, [])
+
+  useEffect(() => {
+    async function getItineraryItems() {
+      trips.map (async function getData (trip) {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${trip.id}/itinerary`, {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        });
+        if (response.status >= 400) {
+          throw new Error("not authorized");
+        } else {
+          const data = await response.json()
+          console.log(data)
+          setItineraryItems(itineraryItems.push(data)); 
+          // setItineraryItems(data);
+        }
+      })
+      console.log(itineraryItems);
+    }
+    getItineraryItems()
   }, [])
 
   function onEditLinkClick(e) {
