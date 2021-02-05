@@ -6,7 +6,7 @@ import PopupModalForm from './PopupModalForm'
 import PopupModalInfo from './PopupModalInfo'
 import LandmarkPopup from './LandmarkPopup'
 
-export function LandmarkCard(props) {
+export default function LandmarkCard(props) {
   const [landmarkDescription, setLandmarkDescription] = useState();
   const [landmarkImageSrc, setLandmarkImageSrc] = useState();
   const [addEditType, setAddEditType] = useState("add");
