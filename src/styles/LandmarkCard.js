@@ -22,10 +22,18 @@ export const StyledLandmarkCard = styled.div`
       height: 270px;
     }
   }
+
+  &.image_only {
+    display: inline;
+    width: auto;
+    height: auto;
+    border: none;
+  }
 `;
 
 export const CardComponents = styled.div`
   &.image {
+    display: inline-block;
     background-image: url("${(props) => props.src}");
     background-position: center center;
     background-repeat: no-repeat;
@@ -97,6 +105,20 @@ export const CardComponents = styled.div`
 
     &.title {
       font-size: 20px;
+    }
+  }
+
+  .image_only & {
+
+    &.image {
+      margin: 0px;
+    }
+    
+    &.body {
+      display: none;
+    }
+    &.button_wrapper {
+      display: none;
     }
   }
 `

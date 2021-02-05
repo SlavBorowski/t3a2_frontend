@@ -1,7 +1,8 @@
 import {useEffect, useState} from 'react';
 import { LoginContext } from '../App';
 import { useContext } from 'react';
-import { ItineraryCard } from './ItineraryCard'
+import { TripCard } from './TripCard'
+import { BackendRequestGET, BackendRequestDELETE } from '../../code_functions/BackendRequest'
 import { ProfileWrapper, 
   ProfileButton,
   InfoWrapper,
@@ -12,92 +13,39 @@ import { ProfileWrapper,
 
 export function Profile(props) {
 
-  const [profile, setProfile] = useState();
+  const [profile, setProfile] = useState({message: "test"});
   const { setLogin } = useContext(LoginContext);
-  const [trips, setTrips] = useState([]);
-  const [itineraryItems, setItineraryItems] = useState([[]]);
-  useEffect(() => {
-    async function getProfile() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      if (response.status >= 400) {
-        throw new Error("not authorized");
-      } else {
-        const data = await response.json()
-        setProfile(data);
-        if(data.message === "no_profile") props.history.push("/profile/form");
-      }
-    }
-    getProfile()
-  }, [props.history])
+  const [tripsCompleted, setTripsCompleted] = useState([]);
+  const [tripsPending, setTripsPending] = useState([]);
+  const [itineraryItems, setItineraryItems] = useState([]);
 
   useEffect(() => {
-    async function getTrips() {
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/trips`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      });
-      if (response.status >= 400) {
-        throw new Error("not authorized");
-      } else {
-        const data = await response.json()
-        console.log(data)
-        setTrips(data);
-      }
-    }
-    getTrips()
+    BackendRequestGET("profile", setProfile)
+    BackendRequestGET("trips_pending", setTripsPending)
+    setTimeout(() => {
+      BackendRequestGET("trips_completed", setTripsCompleted)
+    }, (3000));
+
+    BackendRequestGET("itinerary", setItineraryItems)
   }, [])
 
+  // Check profile has been created, if not push history to form
   useEffect(() => {
-    async function getItineraryItems() {
-      trips.map (async function getData (trip) {
-        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/${trip.id}/itinerary`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        });
-        if (response.status >= 400) {
-          throw new Error("not authorized");
-        } else {
-          const data = await response.json()
-          console.log(data)
-          setItineraryItems(itineraryItems.push(data)); 
-          // setItineraryItems(data);
-        }
-      })
-      console.log(itineraryItems);
-    }
-    getItineraryItems()
-  }, [])
+    if(profile.message === "no_profile") props.history.push("/profile/form");
+  }, [profile, props.history])
 
-  function onEditLinkClick(e) {
-    e.preventDefault()
-    props.history.push("/profile/form")
-  }
-
+  // Deletes user account after confirm
   async function onDeleteLinkClick(e) {
-    try {
-      e.preventDefault();
-      if (window.confirm("Would you like to delete?")) {
-        await fetch(
-          `${process.env.REACT_APP_BACKEND_URL}/user`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-          }
-        );
-        localStorage.removeItem("token");
-        setLogin(false);
-        props.history.push("/")
-      }
-    } catch (err) {
-      console.log(err.message);
+    e.preventDefault();
+    if (window.confirm("Would you like to delete?")) {
+      BackendRequestDELETE("user")
+      localStorage.removeItem("token");
+      setLogin(false);
+      props.history.push("/")
     }
   }
-//test
+
   return (
-    <>
     <PageWrapper>
       {profile &&
       <>
@@ -109,20 +57,26 @@ export function Profile(props) {
         </ProfileWrapper>  
       </>
       }
-      <ProfileButton onClick={(e) => onEditLinkClick(e)}>Edit Profile</ProfileButton>
+      <ProfileButton onClick={() => {props.history.push("/profile/form")}}>Edit Profile</ProfileButton>
       <ProfileButton onClick={(e) => onDeleteLinkClick(e)}>Delete Account</ProfileButton>
 
       <div>
-      {trips && trips.map((trip) =>
-          <ItineraryCard
-            key={trip.title} 
-            title={trip.title}
-            id={trip.id}
-            city={trip.city}
-            date={trip.date}/>
+        <h2>Pending Journeys: </h2>
+        {tripsPending && tripsPending.map((trip, index) =>
+          <TripCard
+            key={trip.title} trip={trip} index={index}
+            itineraryItems={itineraryItems}/>
+        )}
+      </div>
+      <br />
+      <div>
+        <h2>Completed Journeys: </h2>
+        {tripsCompleted && tripsCompleted.map((trip, index) =>
+          <TripCard
+            key={trip.title} trip={trip} index={index}
+            itineraryItems={itineraryItems}/>
         )}
       </div>  
     </PageWrapper>
-    </>
   );
 }
