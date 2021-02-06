@@ -1,13 +1,13 @@
 import {useHistory} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import SaveTrip from '../../../code_functions/SaveTrip';
-import { landmarksSearch } from '../../../api_open_trip_map/landmarksSearch';
-import LandmarkCard from '../../body/LandmarkCard/LandmarkCard'
+import SaveTrip from '../../code_functions/SaveTrip';
+import { landmarksSearch } from '../../api_open_trip_map/landmarksSearch';
+import LandmarkCard from './LandmarkCard/LandmarkCard'
 
 import {
   PlanWrapper, 
   ItineraryWrapper,
-  PlannerInput} from '../../../styles/DayPlanner'
+  PlannerInput} from '../../styles/DayPlanner'
 
 export default function DayPlannerForm(props) {
 
