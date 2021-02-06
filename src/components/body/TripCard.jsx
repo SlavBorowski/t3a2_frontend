@@ -21,7 +21,7 @@ export function TripCard(props) {
   useEffect(() => {
     setTimeout(() => {
       let arr = props.itineraryItems.filter((item) => item.trip_id === props.trip.id)
-      arr = arr.filter((item, index) => index < 5) // Limits number of images displayed to 5
+      arr = arr.filter((item, index) => index < (Math.floor((window.innerWidth-200)/200))) // Limits number of images displayed by window width
       setItineraryItems(arr.sort( CompareTime ));
     }, (1600*props.index));
   }, [props.itineraryItems, props.index, props.trip.id])
