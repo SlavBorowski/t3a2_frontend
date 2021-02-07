@@ -29,7 +29,7 @@ export function PhotoCard(props) {
   return (
     <NavLink to={`/private_gallery/${props.item.name}`}>
       <TripCardWrapper>
-        <TripCardTitle>{props.item.name} - {props.item.time}</TripCardTitle>
+        <TripCardTitle>{props.item.time} - {props.item.name}</TripCardTitle>
           <TripBodyWrapper>
               {/* {itineraryItems && itineraryItems.map((landmark) => 
                 <LandmarkCard 

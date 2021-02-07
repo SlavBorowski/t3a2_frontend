@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {NavLink} from "react-router-dom";
 import {useParams} from "react-router-dom";
 import { ProfileButton } from '../../styles/Profile'
 import { PhotoCard } from '../body/PhotoCard';
@@ -12,24 +13,24 @@ export function TripLog() {
   const [tripDetails, setTripDetails] = useState([]);
 
   useEffect(() => {
-    BackendRequestGET(`/trips/${trip_title}`, setTripDetails)
+    BackendRequestGET(`trips/${trip_id}`, setTripDetails)
     BackendRequestGET(`${trip_id}/itinerary`, setItineraryItems)
     // console.log(tripDetails)
-  }, [trip_id, trip_title])
+  }, [trip_id])
 
   return (
     <>
       <h2>{trip_title}</h2>
       <h3>Date: {tripDetails.date}</h3>
-      <h3>Favorite Place: {tripDetails.favorite_place}</h3>
+      <h3>Favorite Place: {tripDetails.favoriteAttraction}</h3>
       <h3>Reflections:</h3>
       <p>
-      {tripDetails.reflections}
+      {tripDetails.reflections} <br />
         Place Holder Text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
         Suspendisse elit metus, efficitur sagittis pretium sit amet
       </p>
 
-      <ProfileButton>Edit</ProfileButton>
+      <ProfileButton><NavLink to={`/trip_log/${trip_title}/${trip_id}/edit`}>Edit</NavLink></ProfileButton>
       <ProfileButton>Delete</ProfileButton>
       <h3>Trip Itinerary Items</h3>
       <p>Please click on items to see gallery and/or upload photos</p>

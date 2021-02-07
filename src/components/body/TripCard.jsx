@@ -45,7 +45,7 @@ export function TripCard(props) {
           </TripImageWrapper> 
           <TripButtonWrapper> 
             <TripButton><NavLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}>Show</NavLink></TripButton>
-            <TripButton>Edit</TripButton>
+            <TripButton><NavLink to={`/trip_log/${props.trip.title}/${props.trip.id}/edit`}>Edit</NavLink></TripButton>
             <TripButton>Dele</TripButton>
           </TripButtonWrapper>
         </TripBodyWrapper>
