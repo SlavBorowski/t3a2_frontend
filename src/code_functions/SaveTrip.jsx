@@ -1,30 +1,26 @@
+import { BackendRequestPOST, BackendRequestDELETE } from './BackendRequest'
 
+export default async function SaveTrip(trip_body, title, itineraryItems, trip_id) {
+  if(trip_id) BackendRequestDELETE(`trips/${trip_id}`)
+  setTimeout(() => {
+    createNewTrip(trip_body, title, itineraryItems)
+  }, (100));
+}
 
-export default async function SaveTrip(title, date, city, itineraryItems) {
+function createNewTrip(trip_body, title, itineraryItems) {
   try {
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/trips`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}`},
-      body: JSON.stringify({ trip: { title, date, city } })
-    });
-    if (response.status >= 400) {
-      throw new Error("incorrect credentials");
-    } else { 
-      // console.log("Trip Saved")
-      itineraryItems.map(async function itineraryPost(item) {
-        const name = item.name
-        const POI_id = item.xid
-        const time = item.time
-        const notes = item.notes
-  
-        await fetch(`${process.env.REACT_APP_BACKEND_URL}/${title}/itinerary`, {
-          method: "POST",
-          headers: {"Content-Type": "application/json", Authorization: `Bearer ${localStorage.getItem("token")}`},
-          body: JSON.stringify({ itinerary_item: { name, POI_id, time, notes } })
+    const response = BackendRequestPOST("trips", trip_body)
+    setTimeout(() => {
+      if (response.status >= 400) {
+        throw new Error("incorrect credentials");
+      } else { 
+        itineraryItems.map(async function itineraryPost(itinerary_item) {
+          delete itinerary_item.id
+          let itineraryBody = JSON.stringify({itinerary_item})
+          BackendRequestPOST(`${title}/itinerary`, itineraryBody)
         })
-        // console.log("Itinerary Item Saved")
-      })
-    }
+      }
+    }, (100));
   } catch (err) {
     console.log(err.message);
   }

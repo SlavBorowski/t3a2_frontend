@@ -11,7 +11,7 @@ export default function addEditItineraryItems(itineraryItem, itineraryItems, set
     {
       "id": itemId,
       "name": item.name,
-      "xid": item.xid,
+      "POI_id": item.POI_id,
       "time": item.time,
       "notes": item.notes
     }

@@ -51,7 +51,7 @@ export function TripCard(props) {
                 <LandmarkCard 
                   key={landmark.name} 
                   name={landmark.name}
-                  xid={landmark.POI_id}
+                  POI_id={landmark.POI_id}
                   className="image_only"/>
               )}
             </TripImageWrapper> 
