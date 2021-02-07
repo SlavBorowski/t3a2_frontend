@@ -18,7 +18,7 @@ export default function DayPlannerForm(props) {
   const [city, setCity] = useState("");
   const history = useHistory();
   let { trip_id } = useParams();
-  const [tripDetails, setTripDetails] = useState([]);
+  const [tripDetails, setTripDetails] = useState({});
   const today = new Date().toISOString().slice(0, 10)
 
   //If in edit mode, load the current trip values
@@ -31,9 +31,7 @@ export default function DayPlannerForm(props) {
   }, [trip_id])
 
   useEffect(()=> {
-    console.log("Setting the form input values")
-    console.log(tripDetails)
-    if(tripDetails.length > 0) {
+    if(tripDetails.id) {
       document.getElementById("title").value = tripDetails.title
       document.getElementById("date").value = tripDetails.date
     } else {
