@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import {NavLink} from "react-router-dom";
 import { 
   TripCardWrapper, 
   TripCardTitle, 
@@ -43,7 +44,7 @@ export function TripCard(props) {
             )}
           </TripImageWrapper> 
           <TripButtonWrapper> 
-            <TripButton>Show</TripButton>
+            <TripButton><NavLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}>Show</NavLink></TripButton>
             <TripButton>Edit</TripButton>
             <TripButton>Dele</TripButton>
           </TripButtonWrapper>

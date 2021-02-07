@@ -34,6 +34,7 @@ export const TripBodyWrapper = styled.div`
 export const TripButton = styled.button`
   display: block;
   color: white;
+  text-decoration: none;
   background: black;
   border: solid 1px white;
   height: 25px;
