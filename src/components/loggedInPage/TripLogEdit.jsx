@@ -6,26 +6,30 @@ import DateComparison from '../../code_functions/DateComparison'
 export default function TripLogEdit(props) {
   let { trip_title, trip_id } = useParams();
   const [tripDetails, setTripDetails] = useState([]);
-  const [favPlace, setFavPlace] = useState("");
-  const [reflections, setReflections] = useState("");
+  const favPlaceInput = document.getElementById("favorite_place")
+  const reflectionsInput = document.getElementById("reflections")
 
   useEffect(() => {
     BackendRequestGET(`trips/${trip_id}`, setTripDetails)
-    // console.log(tripDetails)
   }, [trip_id])
 
   useEffect(() => {
     if(DateComparison(tripDetails.date)){
       props.history.push(`/day_planner/${trip_id}/edit`)
     }
-  }, [tripDetails.date, props.history])
+    if(favPlaceInput){
+      favPlaceInput.value = tripDetails.favoriteAttraction
+      reflectionsInput.value = tripDetails.reflections
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tripDetails.date])
 
   function onFormSubmit(e) {
       e.preventDefault();
       const body =  JSON.stringify({
         trip: {
-          favoriteAttraction: favPlace,
-          reflections: reflections
+          favoriteAttraction: favPlaceInput.value,
+          reflections: reflectionsInput.value
         }})
       const requestPath = "trips/" + trip_id
       BackendRequestPUT(requestPath, body)
@@ -39,12 +43,10 @@ export default function TripLogEdit(props) {
       <h3>Date: {tripDetails.date}</h3>
       <form onSubmit={onFormSubmit}>
         <label htmlFor="favorite_place">Favorite Place: </label><br />
-        <input type="text" name="favorite_place" id="favorite_place" value={favPlace}
-        onChange={(e) => setFavPlace(e.target.value)}/>
+        <input type="text" name="favorite_place" id="favorite_place" />
         <br /><br />
         <label htmlFor="reflections">Reflections:</label><br />
-        <textarea id="reflections" name="reflections" cols="40" rows="5" value={reflections}
-        onChange={(e) => setReflections(e.target.value)}/>
+        <textarea id="reflections" name="reflections" cols="40" rows="5"/>
         <br /><br />
         <input type="submit" value="Save Log"/>
       </form>
