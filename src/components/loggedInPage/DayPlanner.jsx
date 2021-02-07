@@ -9,7 +9,7 @@ import {
 
 import LandmarkListFooterHTML from '../body/LandmarkCard/LandmarkListFooterHTML'
 import LandmarkCard from '../body/LandmarkCard/LandmarkCard'
-import DayPlannerForm from '../body/DayPlannerForm/DayPlannerForm'
+import DayPlannerForm from '../body/DayPlannerForm'
 
 import { SetLandmarkListFooter } from '../../code_functions/SetLandmarkListFooter'
 import {radiusCountSearch, loadList} from '../../api_open_trip_map/landmarksSearch'

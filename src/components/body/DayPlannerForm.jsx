@@ -1,13 +1,15 @@
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import SaveTrip from '../../../code_functions/SaveTrip';
-import { landmarksSearch } from '../../../api_open_trip_map/landmarksSearch';
-import LandmarkCard from '../../body/LandmarkCard/LandmarkCard'
+import SaveTrip from '../../code_functions/SaveTrip';
+import { landmarksSearch } from '../../api_open_trip_map/landmarksSearch';
+import LandmarkCard from './LandmarkCard/LandmarkCard'
 
 import {
   PlanWrapper, 
   ItineraryWrapper,
-  PlannerInput} from '../../../styles/DayPlanner'
+  PlannerInput} from '../../styles/DayPlanner'
+  import { BackendRequestGET} from '../../code_functions/BackendRequest'
+  
 
 export default function DayPlannerForm(props) {
 
@@ -15,6 +17,31 @@ export default function DayPlannerForm(props) {
   const [title, setTitle] = useState("");
   const [city, setCity] = useState("");
   const history = useHistory();
+  let { trip_id } = useParams();
+  const [tripDetails, setTripDetails] = useState([]);
+  const today = new Date().toISOString().slice(0, 10)
+
+  //If in edit mode, load the current trip values
+  useEffect(()=> {
+    if(trip_id){
+      // console.log("Trip id: " + trip_id)
+      BackendRequestGET(`trips/${trip_id}`, setTripDetails)
+      // console.log("City: " + tripDetails.city)
+    } 
+  }, [trip_id])
+
+  useEffect(()=> {
+    console.log("Setting the form input values")
+    console.log(tripDetails)
+    if(tripDetails.length > 0) {
+      document.getElementById("title").value = tripDetails.title
+      document.getElementById("date").value = tripDetails.date
+    } else {
+      document.getElementById("title").value = ""
+      document.getElementById("date").value = today
+    }
+  }, [tripDetails, today])
+
 
   function onSearchLocation(e){
     if(e) {
@@ -43,21 +70,21 @@ export default function DayPlannerForm(props) {
     <PlanWrapper>
       <form onSubmit={onSearchLocation}>
         <label htmlFor="city">City: </label>
-        <input type="text" name="city" id="city"
-          placeholder="Please enter a destination..." />
+        <input type="text" name="city" id="city" 
+          placeholder={tripDetails.city || "Please enter a destination..."}/>
 
         <PlannerInput type="submit" value="Search" />
       </form><br/>  
 
       <form onSubmit={onSaveTrip}>
         <label htmlFor="title">Title:</label>
-        <input type="title" name="title" id="title" value={title}
+        <input type="title" name="title" id="title" 
           onChange={(e) => setTitle(e.target.value)}
         /><br/><br/>
 
         <label htmlFor="date">Date:</label>
         <input type="date" name="date" id="date" 
-          min="2021-01-01" max="2023-12-31" value={date}
+          min="2021-01-01" max="2023-12-31"
           onChange={(e) => setDate(e.target.value)}
         /><br/><br/>
 

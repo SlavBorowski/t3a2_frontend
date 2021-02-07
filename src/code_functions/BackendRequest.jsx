@@ -17,3 +17,14 @@ export async function BackendRequestDELETE(path) {
     method: "DELETE"
   });
 }
+
+export async function BackendRequestPUT(path, body) {
+  await fetch(`${process.env.REACT_APP_BACKEND_URL}/${path}`, {
+    headers: { 
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}` 
+    },
+    method: "PUT",
+    body: body
+  });
+}

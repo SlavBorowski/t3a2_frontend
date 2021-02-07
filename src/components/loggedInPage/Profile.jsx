@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import { LoginContext } from '../App';
 import { useContext } from 'react';
-import { TripCard } from './TripCard'
+import { TripCard } from '../body/TripCard';
 import { BackendRequestGET, BackendRequestDELETE } from '../../code_functions/BackendRequest'
 import { ProfileWrapper, 
   ProfileButton,
