@@ -35,7 +35,7 @@ export function Profile(props) {
   }, [profile, props.history])
 
   // Deletes user account after confirm
-  async function onDeleteLinkClick(e) {
+  function onDeleteLinkClick(e) {
     e.preventDefault();
     if (window.confirm("Would you like to delete?")) {
       BackendRequestDELETE("user")
