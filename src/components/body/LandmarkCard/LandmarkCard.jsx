@@ -14,10 +14,10 @@ export default function LandmarkCard(props) {
   // Runs on ComponentDidMount once and will set the landmark image/description
   useEffect(() => {
     props.className === "small itinerary" ? setAddEditType("edit") : setAddEditType("add")
-    detailedLandmarkFetch(props.xid, setLandmarkImageSrc, setLandmarkDescription)
-    
+    detailedLandmarkFetch(props.POI_id, setLandmarkImageSrc, setLandmarkDescription)
+    // console.log(props.POI_id)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.xid]);
+  }, [props.POI_id]);
 
   return (
         <StyledLandmarkCard className={props.className}>
@@ -45,7 +45,7 @@ export default function LandmarkCard(props) {
                 landmarkDescription={landmarkDescription}/>}
               itineraryItem={props.itineraryItem}
               name={props.name}
-              xid={props.xid}
+              POI_id={props.POI_id}
               setItineraryItems={props.setItineraryItems}
               itineraryItems={props.itineraryItems}
               setText={props.setText}

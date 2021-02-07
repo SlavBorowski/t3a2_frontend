@@ -63,7 +63,7 @@ export function DayPlanner() {
                 <LandmarkCard 
                   key={landmark.name} 
                   name={landmark.name}
-                  xid={landmark.xid}
+                  POI_id={landmark.xid}
                   className="small"
                   setItineraryItems={setItineraryItems}
                   itineraryItems={itineraryItems}

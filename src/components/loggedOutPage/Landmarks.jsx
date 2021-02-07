@@ -49,7 +49,7 @@ export function Landmarks() {
           <LandmarkCard 
             key={landmark.name} 
             name={landmark.name}
-            xid={landmark.xid}/>
+            POI_id={landmark.xid}/>
         )}
       </div>
       <LandmarkListFooterHTML offset={offset} pageLength={pageLength} setOffset={setOffset}/>

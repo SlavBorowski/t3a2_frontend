@@ -30,7 +30,7 @@ export default function PopupModalForm(props) {
   function onItinerarySave(e, type) {
     e.preventDefault();
 
-    const item = { name:props.name, xid: props.xid, time:time, notes:notes}
+    const item = { name:props.name, POI_id: props.POI_id, time:time, notes:notes}
     AddEditItineraryItems(props.itineraryItem, props.itineraryItems, props.setItineraryItems, item, type, props.setText)
   }
 
