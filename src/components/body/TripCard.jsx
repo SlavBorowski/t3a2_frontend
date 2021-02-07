@@ -6,7 +6,8 @@ import {
   TripImageWrapper,
   TripBodyWrapper,
   TripButtonWrapper,
-  TripButton } from '../../styles/TripCard'
+  TripButton,
+  TripLink } from '../../styles/TripCard'
 
 import LandmarkCard from './LandmarkCard/LandmarkCard'
 import CompareTime from '../../code_functions/CompareTime'
@@ -55,12 +56,12 @@ export function TripCard(props) {
               )}
             </TripImageWrapper> 
             <TripButtonWrapper> 
-              <TripButton><NavLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}>Show</NavLink></TripButton>
-              <TripButton><NavLink to={`/trip_log/${props.trip.title}/${props.trip.id}/edit`}>Edit</NavLink></TripButton>
-              <TripButton onClick={() => onDeleteTripClick()}>Dele</TripButton>
-
-            </TripButtonWrapper>
+              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}><img src={require("../../show.svg").default} alt="show"/></TripLink>
+              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}/edit`}><img src={require("../../edit.svg").default} alt="edit"/></TripLink>
+              <TripButton onClick={() => onDeleteTripClick()}><img src={require("../../delete.svg").default} alt="delete"/></TripButton>
+          </TripButtonWrapper>
           </TripBodyWrapper>
+       
         </TripCardWrapper>
       }
     </>

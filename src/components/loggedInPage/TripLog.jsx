@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
 import {NavLink, useHistory} from "react-router-dom";
+
 import {useParams} from "react-router-dom";
-import { ProfileButton } from '../../styles/Profile'
 import { PhotoCard } from '../body/PhotoCard';
-import { 
-  BackendRequestGET,
-  BackendRequestDELETE } from '../../code_functions/BackendRequest'
+import { BackendRequestGET, BackendRequestDELETE } from '../../code_functions/BackendRequest'
+import { TripLink, TripButton } from '../../styles/TripLog'
+
 
 
 export function TripLog() {
@@ -40,8 +40,9 @@ export function TripLog() {
         Suspendisse elit metus, efficitur sagittis pretium sit amet
       </p>
 
-      <ProfileButton><NavLink to={`/trip_log/${trip_title}/${trip_id}/edit`}>Edit</NavLink></ProfileButton>
-      <ProfileButton onClick={() => onDeleteTripClick()}>Delete trip</ProfileButton>
+      <TripLink to={`/trip_log/${trip_title}/${trip_id}/edit`}>Edit</TripLink>
+      <TripButton onClick={() => onDeleteTripClick()}>Delete</TripButton>
+        
       <h3>Trip Itinerary Items</h3>
       <p>Please click on items to see gallery and/or upload photos</p>
       {itineraryItems && itineraryItems.map((item, index) =>
