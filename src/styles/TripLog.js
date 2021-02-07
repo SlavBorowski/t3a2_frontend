@@ -15,7 +15,7 @@ export const TripLink = styled(NavLink)`
 `;  
 
 export const TripButton = styled.button`
-  color: white;
+  color: black;
   background: black;
   border: solid 1px white;
   margin: 10px 5px;
