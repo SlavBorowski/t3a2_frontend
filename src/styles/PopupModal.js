@@ -40,11 +40,11 @@ export const ModalHeading = styled.h3`
 
 export const PopupButton = styled.button`
   color: white;
-  background: black;
-  border: solid 1px white;
+  background: white;
   height: 25px;
   width: 25px;
   margin: 0px;
+  border: none;
   
 `;
 
