@@ -12,7 +12,7 @@ export default function PopupModalForm(props) {
   let buttonValue = <img src={require("../../../add.svg").default} alt="delete"/>
   let titleString = "Add POI to itinerary:"
   if(props.type === "edit") {
-    buttonValue = "E"
+    buttonValue = <img src={require("../../../edit.svg").default} alt="edit"/>
     titleString = "Edit POI in itinerary:"
   }
 
