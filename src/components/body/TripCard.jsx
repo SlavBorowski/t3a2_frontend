@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {NavLink} from "react-router-dom";
+
 import { 
   TripCardWrapper, 
   TripCardTitle, 
@@ -8,7 +8,6 @@ import {
   TripButtonWrapper,
   TripButton,
   TripLink } from '../../styles/TripCard'
-
 import LandmarkCard from './LandmarkCard/LandmarkCard'
 import CompareTime from '../../code_functions/CompareTime'
 import { BackendRequestDELETE } from '../../code_functions/BackendRequest'

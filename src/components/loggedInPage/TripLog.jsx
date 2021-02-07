@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react';
-import {NavLink, useHistory} from "react-router-dom";
-
 import {useParams} from "react-router-dom";
+
 import { PhotoCard } from '../body/PhotoCard';
 import { BackendRequestGET, BackendRequestDELETE } from '../../code_functions/BackendRequest'
 import { TripLink, TripButton } from '../../styles/TripLog'
