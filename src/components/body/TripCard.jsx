@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { 
   TripCardWrapper, 
   TripCardTitle, 
@@ -7,7 +8,6 @@ import {
   TripButtonWrapper,
   TripButton,
   TripLink } from '../../styles/TripCard'
-
 import LandmarkCard from './LandmarkCard/LandmarkCard'
 import CompareTime from '../../code_functions/CompareTime'
 import { BackendRequestDELETE } from '../../code_functions/BackendRequest'
@@ -25,8 +25,12 @@ export function TripCard(props) {
     if(present){
       setTimeout(() => {
         let arr = props.itineraryItems.filter((item) => item.trip_id === props.trip.id)
-        arr = arr.filter((item, index) => index < (Math.floor((window.innerWidth-200)/200))) // Limits number of images displayed by window width
-        setItineraryItems(arr.sort( CompareTime ));
+        if((Math.floor((window.innerWidth-200)/200)) !== 0){
+          arr = arr.filter((item, index) => index < (Math.floor((window.innerWidth-200)/200))) // Limits number of images displayed by window width
+        } else {
+          arr = arr.filter((item, index) => index < 1)
+        }
+          setItineraryItems(arr.sort( CompareTime ));
       }, (1600*props.index));
     }
   }, [props.itineraryItems, props.index, props.trip.id, present])
