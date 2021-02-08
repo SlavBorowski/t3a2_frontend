@@ -55,9 +55,15 @@ export function TripCard(props) {
               )}
             </TripImageWrapper> 
             <TripButtonWrapper> 
-              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}><img src={require("../../show.svg").default} alt="show"/></TripLink>
-              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}/edit`}><img src={require("../../edit.svg").default} alt="edit"/></TripLink>
-              <TripButton onClick={() => onDeleteTripClick()}><img src={require("../../delete.svg").default} alt="delete"/></TripButton>
+              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}`}>
+                <img src={"/images/icons/show.svg"} alt="show"/>
+              </TripLink>
+              <TripLink to={`/trip_log/${props.trip.title}/${props.trip.id}/edit`}>
+                <img src={"/images/icons/edit.svg"} alt="edit"/>
+              </TripLink>
+              <TripButton onClick={() => onDeleteTripClick()}>
+                <img src={"/images/icons/delete.svg"} alt="delete"/>
+              </TripButton>
           </TripButtonWrapper>
           </TripBodyWrapper>
         </TripCardWrapper>

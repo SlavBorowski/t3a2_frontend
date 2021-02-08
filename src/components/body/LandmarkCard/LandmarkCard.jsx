@@ -56,7 +56,8 @@ export default function LandmarkCard(props) {
               itineraryItems={props.itineraryItems}
               setText={props.setText}
             />
-            <CardComponents className="button" onClick={(e) => onDeleteItineraryItemClick(e)}><img src={require("../../../delete.svg").default} alt="delete"/>
+            <CardComponents className="button" onClick={(e) => onDeleteItineraryItemClick(e)}>
+              <img src={"/images/icons/delete.svg"} alt="delete"/>
             </CardComponents>
           </CardComponents>
 
