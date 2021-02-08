@@ -22,12 +22,18 @@ export function Profile(props) {
   useEffect(() => {
     BackendRequestGET("profile", setProfile)
     BackendRequestGET("trips_pending", setTripsPending)
-    setTimeout(() => {
-      BackendRequestGET("trips_completed", setTripsCompleted)
-    }, (3000));
-
     BackendRequestGET("itinerary", setItineraryItems)
   }, [])
+
+  // Completed trips load after pending trips because the delay depends on the number of pending
+  // This is to avoid the 429 Too many requests error
+  useEffect(() => {
+    if(tripsPending.length > 0){
+      setTimeout(() => {
+        BackendRequestGET("trips_completed", setTripsCompleted)
+      }, (2000*tripsPending.length));
+    }
+  }, [tripsPending.length])
 
   // Check profile has been created, if not push history to form
   useEffect(() => {

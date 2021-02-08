@@ -20,7 +20,7 @@ export function NavBar() {
     <NavWrapper>
       <NavButton to="/">Home </NavButton>
       <NavButton to="/about">About </NavButton>
-      <NavButton to="/landmarks/Paris">Places </NavButton>
+      <NavButton to="/landmarks/Adelaide">Places </NavButton>
       {login ? 
       <>
         <NavButton to="/day_planner">Plans </NavButton>
