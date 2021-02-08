@@ -10,7 +10,7 @@ import {
 export default function PopupModalInfo(props) {
   return (
     <StyledPopup
-      trigger={<PopupButton><img src={require("../../../show.svg").default} alt="view"/></PopupButton>}
+      trigger={<PopupButton><img src={"/images/icons/show.svg"} alt="view"/></PopupButton>}
       modal
       nested
     >

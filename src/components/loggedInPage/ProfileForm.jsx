@@ -64,7 +64,7 @@ export function ProfileForm(props) {
           name="file"
           id="file"
           onChange={(e) => {setFile(e.target.files[0]);}}
-        />
+        /> You must include an image to submit profile
         <br/><br/>
         <label htmlFor="favorite_place">Favorite Place: </label>
         <input

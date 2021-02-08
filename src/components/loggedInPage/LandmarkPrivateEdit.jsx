@@ -74,15 +74,10 @@ export function LandmarkPrivateEdit(props) {
       <label htmlFor="images">Images Upload: </label>
       <input type="file" name="images" id="images" multiple
       onChange={(e) => {setFiles(e.target.files);}}/>
+      You must reload photos if you are editing this landmark 
+      and must include at least one image file to submit
       <br /><br />
       <input type="submit" value="Save Landmark Info"/>
-
-      {/* <PrivateImageWrapper>
-        <PrivateImagePlaceholder></PrivateImagePlaceholder>
-        <PrivateImagePlaceholder></PrivateImagePlaceholder>
-        <PrivateImagePlaceholder></PrivateImagePlaceholder>
-        <PrivateImagePlaceholder></PrivateImagePlaceholder>
-      </PrivateImageWrapper> */}
       </form>
     </PrivatePageWrapper>
   );
