@@ -8,8 +8,8 @@ export const TripCardWrapper = styled.div`
 `;  
 
 export const TripCardTitle = styled.h3`
-  text-align: center;
   margin: 10px;
+  margin-left: 60px;
 `;  
 
 export const TripImageWrapper = styled.div`
@@ -23,6 +23,8 @@ export const TripButtonWrapper = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
+  align-items: flex-start;
+  width: 50px;
 `; 
 
 
