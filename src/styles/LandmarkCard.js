@@ -77,6 +77,10 @@ export const CardComponents = styled.div`
     margin: 5px 0px;
   }
 
+  &.button {
+    display: none;
+  }
+
 
   .small & {
     &.image {
@@ -105,6 +109,12 @@ export const CardComponents = styled.div`
 
     &.title {
       font-size: 20px;
+    }
+  }
+
+  .itinerary & {
+    &.button {
+      display: block;
     }
   }
 

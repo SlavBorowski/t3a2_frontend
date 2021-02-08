@@ -17,6 +17,7 @@ import { ProfileForm } from "./loggedInPage/ProfileForm";
 import { TripLog } from "./loggedInPage/TripLog";
 import TripLogEdit from "./loggedInPage/TripLogEdit";
 import { LandmarkPrivate } from "./loggedInPage/LandmarkPrivate";
+import { LandmarkPrivateEdit } from "./loggedInPage/LandmarkPrivateEdit";
 import { DayPlanner } from "./loggedInPage/DayPlanner";
 
 export const LoginContext = createContext({
@@ -50,7 +51,8 @@ function App() {
           <ProtectedRoute exact path="/profile/form" component={ProfileForm} />
           <ProtectedRoute exact path="/trip_log/:trip_title/:trip_id" component={TripLog} />
           <ProtectedRoute exact path="/trip_log/:trip_title/:trip_id/edit" component={TripLogEdit} />
-          <ProtectedRoute exact path="/private_gallery/:landmark_title" component={LandmarkPrivate} />
+          <ProtectedRoute exact path="/private_gallery/:landmark_city/:landmark_title" component={LandmarkPrivate} />
+          <ProtectedRoute exact path="/private_gallery/:landmark_city/:landmark_title/edit" component={LandmarkPrivateEdit} />
           <Route exact path="/" component={Home} />
         </Switch>
       </SubPageBody>

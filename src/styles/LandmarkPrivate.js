@@ -31,6 +31,11 @@ export const PrivateDate = styled.h3`
 export const PrivateAttraction = styled.h3`
 `;
 
+export const PrivateButton = styled.button`
+  max-height: 30px;
+`;
+
+
 export const PrivateText = styled.p`
   max-width: 60%;
 `;

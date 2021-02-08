@@ -64,7 +64,6 @@ export function TripCard(props) {
               <TripButton onClick={() => onDeleteTripClick()}><img src={require("../../delete.svg").default} alt="delete"/></TripButton>
           </TripButtonWrapper>
           </TripBodyWrapper>
-       
         </TripCardWrapper>
       }
     </>
