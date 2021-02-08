@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {NavLink, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import {useParams} from "react-router-dom";
 import { PhotoCard } from '../body/PhotoCard';
@@ -30,7 +30,7 @@ export function TripLog() {
 
   return (
     <>
-      <h2>{trip_title}</h2>
+      <h2>{trip_title}, {tripDetails.city}</h2>
       <h3>Date: {tripDetails.date}</h3>
       <h3>Favorite Place: {tripDetails.favoriteAttraction}</h3>
       <h3>Reflections:</h3>
@@ -46,7 +46,7 @@ export function TripLog() {
       <h3>Trip Itinerary Items</h3>
       <p>Please click on items to see gallery and/or upload photos</p>
       {itineraryItems && itineraryItems.map((item, index) =>
-        <PhotoCard key={index} item={item} index={index}/>
+        <PhotoCard key={index} item={item} index={index} tripDetails={tripDetails}/>
       )}
     </>
   );

@@ -19,6 +19,12 @@ export default function LandmarkCard(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.POI_id]);
 
+  function onDeleteItineraryItemClick(e) {
+    e.preventDefault();
+    props.itineraryItems.splice(props.itineraryItems.findIndex( item => item.POI_id === props.itineraryItem.POI_id ), 1);
+    props.setText(`Removed ${props.name} from itinerary`)
+  }
+
   return (
         <StyledLandmarkCard className={props.className}>
 
@@ -50,6 +56,8 @@ export default function LandmarkCard(props) {
               itineraryItems={props.itineraryItems}
               setText={props.setText}
             />
+            <CardComponents className="button" onClick={(e) => onDeleteItineraryItemClick(e)}><img src={require("../../../delete.svg").default} alt="delete"/>
+            </CardComponents>
           </CardComponents>
 
         </StyledLandmarkCard>

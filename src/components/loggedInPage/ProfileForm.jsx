@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {BackendRequestDELETE} from '../../code_functions/BackendRequest'
 
 export function ProfileForm(props) {
   const [file, setFile] = useState("");
@@ -30,15 +31,7 @@ export function ProfileForm(props) {
     formData.append("favorite_place", favorite_place);
     formData.append("bio", bio);
     try {
-      if(message === "profile") {
-        await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${localStorage.getItem("token")}`
-          }
-        });
-      }
+      if(message === "profile") { await BackendRequestDELETE("profile") }
       const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/profile`, {
         method: "POST",
         headers: {Authorization: `Bearer ${localStorage.getItem("token")}`},
@@ -70,9 +63,7 @@ export function ProfileForm(props) {
           type="file"
           name="file"
           id="file"
-          onChange={(e) => {
-            setFile(e.target.files[0]);
-          }}
+          onChange={(e) => {setFile(e.target.files[0]);}}
         />
         <br/><br/>
         <label htmlFor="favorite_place">Favorite Place: </label>

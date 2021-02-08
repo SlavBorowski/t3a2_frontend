@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import {NavLink} from "react-router-dom";
 import { 
   TripCardWrapper, 
   TripCardTitle, 
@@ -61,7 +60,6 @@ export function TripCard(props) {
               <TripButton onClick={() => onDeleteTripClick()}><img src={require("../../delete.svg").default} alt="delete"/></TripButton>
           </TripButtonWrapper>
           </TripBodyWrapper>
-       
         </TripCardWrapper>
       }
     </>
